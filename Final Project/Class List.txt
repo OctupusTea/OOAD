@@ -1,0 +1,17 @@
+class Catagory # 項目分類
+	class Catagory_Food extends Catagory # 分類：食
+	class Catagory_Clothing extends Catagory # 分類：衣
+	class Catagory_Housing extends Catagory # 分類：住
+	class Catagory_Transportation extends Catagory # 分類：行
+	class Catagory_Recreation extends Catagory # 分類：育樂
+	class Catagory_Income extends Catagory # 分類：收入
+
+class Account # 項目帳戶
+	class Account_Cash extends Account # 帳戶：現金
+	class Account_CreditCard extends Account # 帳戶：信用卡
+	class Account_PrepaidCard extends Account # 帳戶：儲值卡
+
+class Entry # 收支項目
+
+class SQLiteDatabase # SQLite DB，內建名稱無法更改
+
