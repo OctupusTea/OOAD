@@ -2,6 +2,8 @@ abstract public class Account
 {
 	private double expend;
 	private double income;
+	private String ui_id;		// For UI showcase
+	const private String db_id;	// For DB retrieval
 
 	// expend getter
 	public double Expend( void )
@@ -60,6 +62,34 @@ abstract public class Account
 	{
 		return income - expend;
 	}
+
+	// ui_id getter
+	public String UI_ID( void )
+	{
+		return ui_id;
+	}
+
+	// ui_id setter
+	public boolean UI_ID( String id )
+	{
+		if( id.length( ) > 0 )
+		{
+			ui_id = id;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	// db_id getter
+	public String DB_ID( void )
+	{
+		return db_id;
+	}
+
+	// no setter for db_id for consistance
 
 	// TODO
 	// add a abstract public method to perform something about accounts
