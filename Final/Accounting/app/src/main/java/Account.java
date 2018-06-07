@@ -58,7 +58,7 @@ abstract public class Account
 	}
 
 	// return balance of expenditure and incom
-	public double Balance( void )
+	public double AccountBalance( void )
 	{
 		return income - expend;
 	}

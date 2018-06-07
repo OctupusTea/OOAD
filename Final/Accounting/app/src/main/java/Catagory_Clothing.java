@@ -1,2 +1,4 @@
-public class Catagory_Clothing extends Catagory {
+public class Catagory_Clothing extends Catagory
+{
+
 }
