@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Accounting</string>
+    <string-array name="spinner_backupType">
+        <item>CSV</item>
+        <item>Text</item>
+    </string-array>
 </resources>
