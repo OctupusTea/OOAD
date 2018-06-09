@@ -1,3 +1,5 @@
+package Account;
+
 public class Account_PrepaidCard extends Account
 {
 	private double availableBalance; // balance deposited in the prepaid card
