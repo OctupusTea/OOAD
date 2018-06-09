@@ -1,4 +1,4 @@
-package com.example.myfirstapp.Data;
+package com.github.OctupusTea.Accounting.Record;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

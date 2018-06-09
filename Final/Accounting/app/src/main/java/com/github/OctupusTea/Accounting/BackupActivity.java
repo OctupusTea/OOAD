@@ -1,4 +1,4 @@
-package com.example.myfirstapp;
+package com.github.OctupusTea.Accounting;
 
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -10,7 +10,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myfirstapp.Backup.Backup;
+import com.github.OctupusTea.Accounting.Backup.Backup;
 
 public class BackupActivity extends AppCompatActivity {
 

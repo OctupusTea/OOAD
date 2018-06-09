@@ -1,4 +1,4 @@
-package com.example.myfirstapp.SQLite;
+package com.github.OctupusTea.Accounting.SQLite;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

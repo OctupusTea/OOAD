@@ -1,13 +1,16 @@
 package Account;
 
 import android.nfc.NfcAdapter;
+import java.util.Date;
 
 abstract public class Account
 {
-	protected double expend;		// records expanditure, in positive value
-	protected double income;		// recprds incomes, in positive value
-	protected String ui_id;		// For UI showcase
-	protected String db_id;	// For DB retrieval
+	protected double expend;	// records expanditure, in positive value
+	protected double income;	// recprds incomes, in positive value
+	protected String name;		// For UI showcase
+	protected String id;		// For DB retrieval
+
+	protected List<Catagory> catagoryList;
 
 	// constructors
 	Account( )
@@ -15,29 +18,29 @@ abstract public class Account
 		this.Init( "", 0.0, 0.0 );
 	}
 
-	Account( String id )
+	Account( String name )
 	{
-		this.Init( id, 0.0, 0.0 );
+		this.Init( name, 0.0, 0.0 );
 	}
 
-	Account( String id, double expend_init, double income_init )
+	Account( String name, double expend_init, double income_init )
 	{
-		this.Init( id, expend_init, income_init );
+		this.Init( name, expend_init, income_init );
 	}
 
 	// account init for constructors
-	private void Init( String id, double expend_init, double income_init )
+	private void Init( String name, double expend_init, double income_init )
 	{
 		expend = expend_init;
 		income = income_init;
-		ui_id = id;
-		db_id = GetDbId( ui_id );
+		this.name = name;
+		this.id = GetIdFromName( name );
 	}
 
 	// generator for db_id
-	static private String GetDbId( String ui_id )
+	static private String GetIdFromName( String name )
 	{
-		if( ui_id.equals( "" ) )
+		if( name.equals( "" ) )
 		{
 			return "";
 		}
@@ -78,17 +81,17 @@ abstract public class Account
 	}
 
 	// ui_id getter
-	public String UI_ID( )
+	public String Name( )
 	{
-		return ui_id;
+		return name;
 	}
 
 	// ui_id setter
-	public boolean UI_ID( String id )
+	public boolean Rename( String name )
 	{
-		if( id.length( ) > 0 )
+		if( name.length( ) > 0 )
 		{
-			ui_id = id;
+			this.name = name;
 			return true;
 		}
 		else
@@ -98,12 +101,14 @@ abstract public class Account
 	}
 
 	// db_id getter
-	public String DB_ID( )
+	public String ID( )
 	{
-		return db_id;
+		return id;
 	}
 
 	// no setter for db_id for consistance
 
 	// TODO: add a abstract public method to perform something about accounts
+
+	abstract public void SetRecord( Date recordDate, String recordDescription, double recordExpense );
 }

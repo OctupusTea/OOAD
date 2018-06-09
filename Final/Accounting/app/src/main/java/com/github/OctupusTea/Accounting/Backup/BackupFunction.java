@@ -1,8 +1,8 @@
-package com.example.myfirstapp.Backup;
+package com.github.OctupusTea.Accounting.Backup;
 
 import android.content.Context;
 
-import com.example.myfirstapp.Data.Record;
+import com.github.OctupusTea.Accounting.Data.Record;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
-package com.example.myfirstapp.Backup;
+package com.github.OctupusTea.Accounting.Backup;
 
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
-import com.example.myfirstapp.DBAdapter.BackupFunctionAdapter;
-import com.example.myfirstapp.Data.Record;
+import com.github.OctupusTea.Accounting.DBAdapter.BackupFunctionAdapter;
+import com.github.OctupusTea.Accounting.Data.Record;
 
 import java.io.File;
 import java.util.List;

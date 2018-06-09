@@ -1,13 +1,13 @@
-package com.example.myfirstapp.DBAdapter;
+package com.github.OctupusTea.Accounting.DBAdapter;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.myfirstapp.Backup.BackupFunction;
-import com.example.myfirstapp.Data.Record;
-import com.example.myfirstapp.SQLite.AccountingDBHelper;
-import com.example.myfirstapp.SQLite.DBFunction;
+import com.github.OctupusTea.Accounting.Backup.BackupFunction;
+import com.github.OctupusTea.Accounting.Data.Record;
+import com.github.OctupusTea.Accounting.SQLite.AccountingDBHelper;
+import com.github.OctupusTea.Accounting.SQLite.DBFunction;
 
 import java.util.ArrayList;
 import java.util.List;

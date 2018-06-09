@@ -1,11 +1,11 @@
-package com.example.myfirstapp.SQLite;
+package com.github.OctupusTea.Accounting.SQLite;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.myfirstapp.Data.Record;
+import com.github.OctupusTea.Accounting.Data.Record;
 
 public class DBFunction {
     private SQLiteDatabase db;

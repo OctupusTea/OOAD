@@ -1,10 +1,10 @@
-package com.example.myfirstapp.Backup;
+package com.github.OctupusTea.Accounting.Backup;
 
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.myfirstapp.Data.Record;
+import com.github.OctupusTea.Accounting.Data.Record;
 
 import java.io.File;
 import java.io.FileNotFoundException;
