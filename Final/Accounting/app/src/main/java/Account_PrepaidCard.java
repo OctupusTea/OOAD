@@ -1,23 +1,28 @@
 public class Account_PrepaidCard extends Account
 {
-    private double availableBalance; // balance deposited in the prepaid card
+	private double availableBalance; // balance deposited in the prepaid card
 
+	// balance getter
+	public double AvailableBalance( )
+	{
+		return availableBalance;
+	}
 
-    // balance getter
-    public double AvailableBalance( void )
-    {
-        return availableBalance;
-    }
+	// balance adder
+	public void Deposit(double change_value) {
+		availableBalance += change_value;
+	}
 
-    // balance setter
-    public boolean AvailableBalance( double availableBalance )
-    {
-        this.availableBalance = availableBalance;
-    }
+	// override: expend adder, income adder and balance adder
+	public void Add_Expend( double change_value )
+	{
+		expend += change_value;
+		availableBalance -= change_value;
+	}
 
-    // balance adder
-    public void Add_AvailableBalance( double change_value )
-    {
-        availableBalance += change_value;
-    }
+	// check balance, only for prepaid card
+	public boolean OutOfBalance( )
+	{
+		return availableBalance <= 0;
+	}
 }

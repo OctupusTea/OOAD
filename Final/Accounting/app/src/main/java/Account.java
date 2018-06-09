@@ -1,28 +1,54 @@
+import android.nfc.NfcAdapter;
+
 abstract public class Account
 {
-	private double expend;
-	private double income;
-	private String ui_id;		// For UI showcase
-	const private String db_id;	// For DB retrieval
+	protected double expend;		// records expanditure, in positive value
+	protected double income;		// recprds incomes, in positive value
+	protected String ui_id;		// For UI showcase
+	protected String db_id;	// For DB retrieval
 
-	// expend getter
-	public double Expend( void )
+	// constructors
+	Account( )
 	{
-		return expend;
+		this.Init( "", 0.0, 0.0 );
 	}
 
-	// expend setter
-	public boolean Expend( double expend )
+	Account( String id )
 	{
-		if( expend >= 0.0 )
+		this.Init( id, 0.0, 0.0 );
+	}
+
+	Account( String id, double expend_init, double income_init )
+	{
+		this.Init( id, expend_init, income_init );
+	}
+
+	// account init for constructors
+	private void Init( String id, double expend_init, double income_init )
+	{
+		expend = expend_init;
+		income = income_init;
+		ui_id = id;
+		db_id = GetDbId( ui_id );
+	}
+
+	// generator for db_id
+	static private String GetDbId( String ui_id )
+	{
+		if( ui_id.equals( "" ) )
 		{
-			this.expend = expend;
-			return true;
+			return "";
 		}
-		else
+		else // TODO: add a proper algorithm to avoid repeating db_id
 		{
-			return false;
+			return "the_db_id";
 		}
+	}
+
+	// expend getter
+	public double Expend( )
+	{
+		return expend;
 	}
 
 	// expend adder
@@ -32,23 +58,9 @@ abstract public class Account
 	}
 
 	// income getter
-	public double Income( void )
+	public double Income( )
 	{
 		return income;
-	}
-
-	// income setter
-	public boolean Income( double income )
-	{
-		if( income >= 0.0 )
-		{
-			this.income = income;
-			return true;
-		}
-		else
-		{
-			return false;
-		}
 	}
 
 	// income adder
@@ -58,13 +70,12 @@ abstract public class Account
 	}
 
 	// return balance of expenditure and incom
-	public double AccountBalance( void )
 	{
 		return income - expend;
 	}
 
 	// ui_id getter
-	public String UI_ID( void )
+	public String UI_ID( )
 	{
 		return ui_id;
 	}
@@ -84,13 +95,12 @@ abstract public class Account
 	}
 
 	// db_id getter
-	public String DB_ID( void )
+	public String DB_ID( )
 	{
 		return db_id;
 	}
 
 	// no setter for db_id for consistance
 
-	// TODO
-	// add a abstract public method to perform something about accounts
+	// TODO: add a abstract public method to perform something about accounts
 }
