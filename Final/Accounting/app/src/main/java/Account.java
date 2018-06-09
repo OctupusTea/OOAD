@@ -69,7 +69,8 @@ abstract public class Account
 		income += change_value;
 	}
 
-	// return balance of expenditure and incom
+	// return balance of expenditure and income
+	public double AccountBalance( )
 	{
 		return income - expend;
 	}
