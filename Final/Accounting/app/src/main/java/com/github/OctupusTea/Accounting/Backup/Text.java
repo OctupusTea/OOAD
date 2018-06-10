@@ -23,15 +23,13 @@ public class Text extends DataFormat {
         try {
             PrintWriter printWriter = new PrintWriter(new FileOutputStream(backupFile));
             for(Record record : recordList) {
-                String inputData = String.format("%s;%s;%s;%s;%s;%s\n", record.getId(), record.getAccountName(), record.getCategorayName(), record.getDate(), record.getCurrencyType(), record.getCost());
+                String inputData = String.format("%s;%s;%s;%s;%s;%s\n", record.getId(), record.getAccountName(), record.getCategoryName(), record.getDate(), record.getCurrencyType(), record.getCost());
                 printWriter.println(inputData);
             }
             Toast toast = Toast.makeText(context, "Backup Success", Toast.LENGTH_LONG);
             toast.show();
             printWriter.close();
             printWriter.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

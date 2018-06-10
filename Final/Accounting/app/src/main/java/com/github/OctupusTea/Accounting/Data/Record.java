@@ -7,7 +7,8 @@ import java.util.*;
 import android.util.*;
 import android.content.Context;
 
-import com.github.OctupusTea.Accounting.SQLite.*
+import com.github.OctupusTea.Accounting.AccountingApp;
+import com.github.OctupusTea.Accounting.SQLite.*;
 
 public class Record {
     private int id;
@@ -127,8 +128,8 @@ public class Record {
     // single attribute modifier
     static public Record Modify( Record record, String modifyAttr, String modifyValue )
     {
+        AccountingDBHelper dbHelper = AccountingDBHelper.getDBHelper( AccountingApp.getContext( ) );
         // TODO: fetch data from DB and modify (single attribute)
-        AccountingDBHelper dbHelper = AccountingDBHelper.getDBHelper( getContext( ) );
         return new Record( );
     }
 
