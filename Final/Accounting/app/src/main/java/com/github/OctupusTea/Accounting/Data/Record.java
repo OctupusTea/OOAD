@@ -5,6 +5,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import android.util.*;
+import android.content.Context;
+
+import com.github.OctupusTea.Accounting.SQLite.*
 
 public class Record {
     private int id;
@@ -125,6 +128,7 @@ public class Record {
     static public Record Modify( Record record, String modifyAttr, String modifyValue )
     {
         // TODO: fetch data from DB and modify (single attribute)
+        AccountingDBHelper dbHelper = AccountingDBHelper.getDBHelper( getContext( ) );
         return new Record( );
     }
 

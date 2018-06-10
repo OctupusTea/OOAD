@@ -21,7 +21,7 @@ public class DBFunction {
     public long insert(Record record) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(AccountingDBHelper.FIELD_ACCOUNT, record.getAccountName());
-        contentValues.put(AccountingDBHelper.FIELD_CATEGORY, record.getCategorayName());
+        contentValues.put(AccountingDBHelper.FIELD_CATEGORY, record.getCategoryName());
         contentValues.put(AccountingDBHelper.FIELD_DATE, record.getDate());
         contentValues.put(AccountingDBHelper.FIELD_CURRENCY_TYPE, record.getCurrencyType());
         contentValues.put(AccountingDBHelper.FIELD_COST, record.getCost());
@@ -77,7 +77,7 @@ public class DBFunction {
         Record record = new Record();
         record.setId(cursor.getInt(0));
         record.setAccountName(cursor.getString(1));
-        record.setCategorayName(cursor.getString(2));
+        record.setCategoryName(cursor.getString(2));
         record.setDate(cursor.getString(3));
         record.setCurrencyType(cursor.getString(4));
         record.setCost(cursor.getFloat(5));
