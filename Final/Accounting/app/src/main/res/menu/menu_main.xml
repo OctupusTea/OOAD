@@ -1,0 +1,30 @@
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_settings1"
+        android:title="新增帳戶"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_settings2"
+        android:title="統計"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_settings3"
+        android:title="密碼"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_settings4"
+        android:title="提醒設定"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_settings5"
+        android:title="備份"
+        app:showAsAction="never" />
+
+
+</menu>

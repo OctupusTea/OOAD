@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ImageButton iBtn01 = (ImageButton) findViewById(R.id.imageButton);  //主頁面左按鍵
-        ImageButton iBtn02 = (ImageButton) findViewById(R.id.imageButton1); //主頁面右按鍵
+        ImageButton iBtn01 = (ImageButton) findViewById(R.id.imageButton4);  //主頁面左按鍵
+        ImageButton iBtn02 = (ImageButton) findViewById(R.id.imageButton5); //主頁面右按鍵
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         Date curDate = new Date(System.currentTimeMillis()); //取得系統時間
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button categoryViewBtn = (Button) findViewById(R.id.button);
+        Button categoryViewBtn = (Button) findViewById(R.id.imageButton4);
         categoryViewBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button accountViewBtn = (Button) findViewById(R.id.button1);
+        Button accountViewBtn = (Button) findViewById(R.id.imageButton5);
         accountViewBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
