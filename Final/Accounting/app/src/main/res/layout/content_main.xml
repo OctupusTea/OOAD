@@ -171,7 +171,7 @@
                     android:singleLine="false"
                     android:textAlignment="textStart"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="36sp" />
+                    android:textSize="26sp" />
 
                 <EditText
                     android:id="@+id/cal_calculation_input"
@@ -188,7 +188,7 @@
                     android:maxLength="10"
                     android:textAlignment="textEnd"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="36sp" />
+                    android:textSize="26sp" />
 
                 <Button
                     android:id="@+id/cal_btn_clear"
