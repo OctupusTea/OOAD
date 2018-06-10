@@ -3,7 +3,8 @@ package com.github.OctupusTea.Accounting.Data;
 import java.lang.ref.SoftReference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
+import android.util.*;
 
 public class Record {
     private int id;
@@ -118,4 +119,26 @@ public class Record {
         this.cost = cost;
     }
 
+    // functions for create, modify or delete a record.
+    // creator: use constructor instead
+    // single attribute modifier
+    static public Record Modify( Record record, String modifyAttr, String modifyValue )
+    {
+        // TODO: fetch data from DB and modify (single attribute)
+        return new Record( );
+    }
+
+    // multiple attribute modifier
+    static public Record Modify(Record record, List< Pair< String, String > > modifyList )
+    {
+        // TODO: fetch data from DB and modify (multiple attribute)
+        /** taking efficiency into consideration, not using multiple "single Modify( )". **/
+        return new Record( );
+    }
+
+    static public Record Delete( Record record )
+    {
+        // TODO: send query to DB and delete entry
+        return new Record( );
+    }
 }
