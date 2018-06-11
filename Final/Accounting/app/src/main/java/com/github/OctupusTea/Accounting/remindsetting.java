@@ -1,4 +1,4 @@
-package com.accounting1;
+package com.github.OctupusTea.Accounting;
 
 import android.content.Intent;
 import android.os.Bundle;

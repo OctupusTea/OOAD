@@ -10,7 +10,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.accounting.R;
 import com.github.OctupusTea.Accounting.Backup.Backup;
 
 public class BackupActivity extends AppCompatActivity {
