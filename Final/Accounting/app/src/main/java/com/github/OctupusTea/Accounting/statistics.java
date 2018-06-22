@@ -1,4 +1,4 @@
-package com.github.OctupusTea.Accounting
+package com.github.OctupusTea.Accounting;
 
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
