@@ -31,7 +31,7 @@
             android:label="@string/title_activity_accountview"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.github.OctupusTea.Accounting.notificationSetting"
+            android:name="com.github.OctupusTea.Accounting.alarmSetting"
             android:label="@string/title_activity_remindsetting"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

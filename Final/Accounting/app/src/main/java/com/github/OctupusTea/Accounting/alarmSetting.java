@@ -7,12 +7,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-public class notificationSetting extends AppCompatActivity {
+public class alarmSetting extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.notificationSetting);
+        setContentView(R.layout.activity_alarmSetting);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -22,7 +22,7 @@ public class notificationSetting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(notificationSetting.this, MainActivity.class);
+                intent.setClass(alarmSetting.this, MainActivity.class);
                 startActivity(intent);
             }
         });
