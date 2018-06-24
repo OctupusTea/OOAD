@@ -41,7 +41,7 @@
             android:label="@string/title_activity_alarmSetting"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".accountAdd"
+            android:name=".AccountAdd"
             android:label="@string/title_activity_accountAdd"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
