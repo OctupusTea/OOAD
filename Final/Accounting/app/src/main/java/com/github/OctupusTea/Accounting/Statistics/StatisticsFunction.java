@@ -9,23 +9,23 @@ import java.util.List;
 
 public abstract class StatisticsFunction {
 
-    public abstract List<Record> getDataByYear(String account, String year);
-    public abstract List<Record> getDataByMonth(String account, String year, String month);
-    public abstract List<Record> getDataByDay(String account, String year, String month, String day);
+    public abstract List<Record> getDataByYear(String year);
+    public abstract List<Record> getDataByMonth(String year, String month);
+    public abstract List<Record> getDataByDay(String year, String month, String day);
 
-    public List<Statistics> getSumOfEachCategory(String account, String dateType, DatePart datePart) {
+    public List<Statistics> getSumOfEachCategory(String dateType, DatePart datePart) {
 
         List<Record> recordList = null;
 
         switch (dateType) {
             case "year":
-                recordList = getDataByYear(account, datePart.getYear());
+                recordList = getDataByYear(datePart.getYear());
                 break;
             case "month":
-                recordList = getDataByMonth(account, datePart.getYear(), datePart.getMonth());
+                recordList = getDataByMonth(datePart.getYear(), datePart.getMonth());
                 break;
             case "day":
-                recordList = getDataByDay(account, datePart.getYear(), datePart.getMonth(), datePart.getDay());
+                recordList = getDataByDay(datePart.getYear(), datePart.getMonth(), datePart.getDay());
                 break;
         }
 
