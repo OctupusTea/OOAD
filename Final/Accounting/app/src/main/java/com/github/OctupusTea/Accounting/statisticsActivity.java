@@ -64,14 +64,12 @@ public class statisticsActivity extends AppCompatActivity {
         String str_m;
         String str_d;
         DatePart datePart = new DatePart();
-        double sum;
-        double income;
-        double balance;
         TextView textView_sum = (TextView) findViewById(R.id.textView7);
         TextView textView_income = (TextView) findViewById(R.id.textView5);
         TextView textView_balance = (TextView) findViewById(R.id.textView9);
         Double sum;
-        TextView textView_sum = (TextView) findViewById(R.id.textView5);
+        Double income;
+        Double balance;
         switch(choice){
             case 1:
                 formatter = new SimpleDateFormat ("yyyy");
@@ -79,13 +77,13 @@ public class statisticsActivity extends AppCompatActivity {
                 str_y = formatter.format(curDate_1); //年
                 datePart.setYear(str_y);
                 sum = sAdapter.getSumOfAllCategory( "year", datePart ); //支出
-                textView_sum.setText(Double.valueOf(sum).toString());
+                textView_sum.setText(sum.toString());
                 // List<Statistics> sumOfCategoryList_1 = sAdapter.getSumOfEachCategory("year", datePart);
                 // textView_sum.setText(sumOfCategoryList_1);
                 income = sAdapter.getEachCategory( "year", datePart, category[6] ); //收入
-                textView_income.setText(Double.valueOf(income).toString());
+                textView_income.setText(income.toString());
                 balance=income-sum; //結餘
-                textView_balance.setText(Double.valueOf(balance).toString());
+                textView_balance.setText(balance.toString());
 
                 for(int i=0;i<7;i++){
                     data[i]=sAdapter.getEachCategory( "year", datePart,category[i] );
@@ -102,13 +100,13 @@ public class statisticsActivity extends AppCompatActivity {
                 datePart.setYear(str_y);
                 datePart.setMonth(str_m);
                 sum = sAdapter.getSumOfAllCategory( "month", datePart ); //支出
-                textView_sum.setText(Double.valueOf(sum).toString());
+                textView_sum.setText(sum.toString());
                 // List<Statistics> sumOfCategoryList_2 = sAdapter.getSumOfEachCategory("month", datePart);
                 // textView_sum.setText(sumOfCategoryList_2);
                 income = sAdapter.getEachCategory( "month", datePart, category[6] ); //收入
-                textView_income.setText(Double.valueOf(income).toString());
+                textView_income.setText(income.toString());
                 balance=income-sum; //結餘
-                textView_balance.setText(Double.valueOf(balance).toString());
+                textView_balance.setText(balance.toString());
 
                 for(int i=0;i<7;i++){
                     data[i]=sAdapter.getEachCategory( "month", datePart,category[i] );
@@ -127,13 +125,13 @@ public class statisticsActivity extends AppCompatActivity {
                 datePart.setMonth(str_m);
                 datePart.setMonth(str_d);
                 sum = sAdapter.getSumOfAllCategory( "day", datePart );
-                textView_sum.setText(Double.valueOf(sum).toString());
+                textView_sum.setText(sum.toString());
                 //List<Statistics> sumOfCategoryList_3 = sAdapter.getSumOfEachCategory("day", datePart);
                 //textView_sum.setText(sumOfCategoryList_3);
                 income = sAdapter.getEachCategory( "day", datePart,category[6] ); //收入
-                textView_income.setText(Double.valueOf(income).toString());
+                textView_income.setText(income.toString());
                 balance=income-sum; //結餘
-                textView_balance.setText(Double.valueOf(balance).toString());
+                textView_balance.setText(balance.toString());
 
                 for(int i=0;i<7;i++){
                     data[i]=sAdapter.getEachCategory( "day", datePart,category[i] );
@@ -165,9 +163,9 @@ public class statisticsActivity extends AppCompatActivity {
         String str_m;
         String str_d;
         DatePart datePart = new DatePart();
-        double sum;
-        double income;
-        double balance;
+        Double sum;
+        Double income;
+        Double balance;
         TextView textView_sum = (TextView) findViewById(R.id.textView7);
         TextView textView_income = (TextView) findViewById(R.id.textView5);
         TextView textView_balance = (TextView) findViewById(R.id.textView9);
@@ -179,11 +177,11 @@ public class statisticsActivity extends AppCompatActivity {
                 str_y = formatter2.format(curDate_1); //年
                 datePart.setYear(str_y);
                 sum = sAdapter.getSumOfAllCategory( "year", datePart );
-                textView_sum.setText(Double.valueOf(sum).toString());
+                textView_sum.setText(sum.toString());
                 income = sAdapter.getEachCategory( "year", datePart,category[6] ); //收入
-                textView_income.setText(Double.valueOf(income).toString());
+                textView_income.setText(income.toString());
                 balance=income-sum; //結餘
-                textView_balance.setText(Double.valueOf(balance).toString());
+                textView_balance.setText(balance.toString());
                 for(int i=0;i<7;i++){
                     data[i]=sAdapter.getEachCategory( "year", datePart,category[i] );
                 }
@@ -199,11 +197,11 @@ public class statisticsActivity extends AppCompatActivity {
                 datePart.setYear(str_y);
                 datePart.setMonth(str_m);
                 sum = sAdapter.getSumOfAllCategory( "month", datePart );
-                textView_sum.setText(Double.valueOf(sum).toString());
+                textView_sum.setText(sum.toString());
                 income = sAdapter.getEachCategory( "month", datePart, category[6] ); //收入
-                textView_income.setText(Double.valueOf(income).toString());
+                textView_income.setText(income.toString());
                 balance=income-sum; //結餘
-                textView_balance.setText(Double.valueOf(balance).toString());
+                textView_balance.setText(balance.toString());
                 for(int i=0;i<7;i++){
                     data[i]=sAdapter.getEachCategory( "month", datePart,category[i] );
                 }
@@ -222,11 +220,11 @@ public class statisticsActivity extends AppCompatActivity {
                 datePart.setMonth(str_m);
                 datePart.setMonth(str_d);
                 sum = sAdapter.getSumOfAllCategory( "day", datePart );
-                textView_sum.setText(Double.valueOf(sum).toString());
+                textView_sum.setText(sum.toString());
                 income = sAdapter.getEachCategory( "day", datePart,category[6] ); //收入
-                textView_income.setText(Double.valueOf(income).toString());
+                textView_income.setText(income.toString());
                 balance=income-sum; //結餘
-                textView_balance.setText(Double.valueOf(balance).toString());
+                textView_balance.setText(balance.toString());
                 for(int i=0;i<7;i++){
                     data[i]=sAdapter.getEachCategory( "day", datePart,category[i] );
                 }

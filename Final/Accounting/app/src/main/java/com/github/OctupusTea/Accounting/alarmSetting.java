@@ -24,17 +24,21 @@ public class alarmSetting extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarmsetting);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button remindersettingBtn = (Button) findViewById(R.id.alarmConfirm );
-        remindersettingBtn.setOnClickListener(new View.OnClickListener() {
+        Button alarmConfirmButton = findViewById(R.id.alarmConfirm );
+        alarmConfirmButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+				Intent intent = new Intent();
+				intent.setClass(alarmSetting.this, alarmPick.class);
+				intent.putExtra("callerID", v.getId());
+				startActivityForResult(intent, 0xFF0E);
+            	/*Intent intent = new Intent();
                 intent.setClass(alarmSetting.this, MainActivity.class);
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
 
@@ -62,13 +66,13 @@ public class alarmSetting extends AppCompatActivity {
 		alarmPreferences.edit().commit();
 	}
 
-    public void onClick( View view )
+	/*public void onClick( View view )
 	{
 		Intent intent = new Intent();
 		intent.setClass(alarmSetting.this, alarmPick.class );
 		intent.putExtra( "callerID", view.getId() );
 		startActivityForResult( intent, 0xFF0E );
-	}
+	}*/
 
 	public void onActivityResult( int requestCode, int resultCode, Intent data )
 	{
