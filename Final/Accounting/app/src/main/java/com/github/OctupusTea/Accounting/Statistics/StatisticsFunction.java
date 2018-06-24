@@ -49,4 +49,17 @@ public abstract class StatisticsFunction {
 
         return statisticsList;
     }
+
+    public double getSumOfAllCategory( String dateType, DatePart datepart )
+	{
+		List< Statistics > sumList = getSumOfEachCategory( dateType, datepart );
+		double sum = 0.0;
+
+		for( Statistics i : sumList)
+		{
+			sum += i.getSum( );
+		}
+
+		return sum;
+	}
 }

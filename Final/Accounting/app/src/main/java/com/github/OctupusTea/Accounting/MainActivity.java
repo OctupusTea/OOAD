@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.lang.reflect.Type;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -324,15 +325,30 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-
-
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings1) {
-            return true;
+        switch ( id )
+		{
+			case R.id.action_settings0:
+				RunActivity( null ); // TODO: add account adding activity here
+				return true;
+			case R.id.action_settings1:
+				RunActivity( null ); // TODO: add statistics activity here
+				return true;
+			case R.id.action_settings2:
+				RunActivity( alarmSetting.class );
+				return true;
+			case R.id.action_settings3:
+				RunActivity( null ); // TODO: add backup activity here
+				return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-
+    private void RunActivity( Class<?> cls ) {
+		Intent intent = new Intent();
+		intent.setClass(MainActivity.this, cls);
+		startActivity(intent);
+		MainActivity.this.finish();
+	}
 }

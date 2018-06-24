@@ -69,8 +69,10 @@ public class statisticsActivity extends AppCompatActivity {
                 Date curDate_1 =  new Date(System.currentTimeMillis());
                 str_y = formatter.format(curDate_1); //年
                 datePart.setYear(str_y);
-                List<Statistics> sumOfCategoryList_1 = sAdapter.getSumOfEachCategory("year", datePart);
-                textView_sum.setText(sumOfCategoryList_1);
+                double sum = sAdapter.getSumOfAllCategory( "year", datePart );
+                textView_sum.setText( sum.toString( ) );
+                // List<Statistics> sumOfCategoryList_1 = sAdapter.getSumOfEachCategory("year", datePart);
+                // textView_sum.setText(sumOfCategoryList_1);
                 break;
             case 2:
                 formatter = new SimpleDateFormat ("yyyy/MM");
