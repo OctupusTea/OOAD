@@ -24,35 +24,35 @@
         </activity>
         <activity
             android:name="com.github.OctupusTea.Accounting.categoryView"
-            android:label="@string/title_activity_category_view"
+            android:label="@string/title_activity_categoryView"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.github.OctupusTea.Accounting.accountView"
-            android:label="@string/title_activity_accountview"
+            android:label="@string/title_activity_accountView"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.github.OctupusTea.Accounting.alarmSetting"
-            android:label="@string/title_activity_remindsetting"
+            android:label="@string/title_activity_alarmSetting"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.github.OctupusTea.Accounting.accountAdd"
-            android:label="@string/title_activity_accountadd"
+            android:label="@string/title_activity_accountAdd"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.github.OctupusTea.Accounting.statisticsActivity"
-            android:label="@string/title_activity_statistics"
+            android:label="@string/title_activity_statisticsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.github.OctupusTea.Accounting.numericPassword"
-            android:label="@string/title_activity_numberpassword"
+            android:label="@string/title_activity_numericPassword"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.github.OctupusTea.Accounting.patternLock"
-            android:label="@string/title_activity_photopassword"
+            android:label="@string/title_activity_patternLock"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.github.OctupusTea.Accounting.passwordSetting"
-            android:label="@string/title_activity_passwordsetting"
+            android:label="@string/title_activity_passwordSetting"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
