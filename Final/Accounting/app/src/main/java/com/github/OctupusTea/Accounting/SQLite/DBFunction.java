@@ -28,6 +28,19 @@ public class DBFunction {
         return db.insert(AccountingDBHelper.TABLE_NAME, null, contentValues);
     }
 
+    public boolean update(Record record) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(AccountingDBHelper.FIELD_ACCOUNT, record.getAccountName());
+        contentValues.put(AccountingDBHelper.FIELD_CATEGORY, record.getCategoryName());
+        contentValues.put(AccountingDBHelper.FIELD_DATE, record.getDate());
+        contentValues.put(AccountingDBHelper.FIELD_CURRENCY_TYPE, record.getCurrencyType());
+        contentValues.put(AccountingDBHelper.FIELD_COST, record.getCost());
+
+        String where = AccountingDBHelper.KEY_ID + "=" + Integer.toString(record.getId());
+
+        return db.update(AccountingDBHelper.TABLE_NAME, contentValues, where, null) > 0;
+    }
+
     public Record getById(int id) {
             Record record = new Record();
             String where = AccountingDBHelper.KEY_ID + "=" + id;
