@@ -64,6 +64,10 @@
             android:name=".alarmPick"
             android:label="AlarmReceiver"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BackupActivity"
+            android:label="BackupActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <receiver android:name=".AlarmReceiver">
             <intent-filter>
