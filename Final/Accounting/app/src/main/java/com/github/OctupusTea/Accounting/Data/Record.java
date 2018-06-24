@@ -1,14 +1,13 @@
 package com.github.OctupusTea.Accounting.Data;
 
-import java.lang.ref.SoftReference;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import android.util.*;
-import android.content.Context;
 
-import com.github.OctupusTea.Accounting.AccountingApp;
 import com.github.OctupusTea.Accounting.SQLite.*;
+
+import static com.github.OctupusTea.Accounting.AccountingApp.getContext;
 
 public class Record {
     private int id;
@@ -128,8 +127,11 @@ public class Record {
     // single attribute modifier
     static public Record Modify( Record record, String modifyAttr, String modifyValue )
     {
-        AccountingDBHelper dbHelper = AccountingDBHelper.getDBHelper( AccountingApp.getContext( ) );
+        DBFunction db = new DBFunction( getContext( ) );
         // TODO: fetch data from DB and modify (single attribute)
+
+
+
         return new Record( );
     }
 
