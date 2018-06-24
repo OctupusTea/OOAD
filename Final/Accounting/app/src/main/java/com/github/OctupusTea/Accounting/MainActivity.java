@@ -327,8 +327,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings1) {
-            return true;
+        switch ( id )
+		{
+			case R.id.action_settings1:
+				return true;
+			case R.id.action_settings3:
+				return true;
         }
 
         return super.onOptionsItemSelected(item);
