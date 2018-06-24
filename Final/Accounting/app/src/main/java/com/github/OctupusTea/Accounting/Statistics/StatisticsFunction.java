@@ -55,7 +55,7 @@ public abstract class StatisticsFunction {
 		List< Statistics > sumList = getSumOfEachCategory( dateType, datepart );
 		double sum = 0.0;
 
-		for( Statistics i : sumList)
+		for( Statistics i : sumList )
 		{
 			sum += i.getSum( );
 		}

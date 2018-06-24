@@ -56,9 +56,14 @@
             android:label="@string/title_activity_passwordSetting"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AlarmReceiver"
+            android:name=".alarmPick"
             android:label="AlarmReceiver"
             android:theme="@style/AppTheme.NoActionBar" />
+        <receiver android:name=".alarmReceiver">
+            <intent-filter>
+                <action android:name="accountingNotify"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
