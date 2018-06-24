@@ -336,7 +336,9 @@ public class MainActivity extends AppCompatActivity {
 				RunActivity( AlarmSetting.class );
 				return true;
 			case R.id.action_settings3:
-				RunActivity( BackupActivity.class );
+			    Intent intent = new Intent(this, BackupActivity.class);
+			    startActivity(intent);
+				//RunActivity( BackupActivity.class );
 				return true;
         }
 
