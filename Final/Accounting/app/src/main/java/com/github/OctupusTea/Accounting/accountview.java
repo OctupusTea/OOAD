@@ -33,6 +33,10 @@ public class accountView extends Activity {
                 EditText editText = (EditText) findViewById(R.id.editText);
                 String input = editText.getText().toString();
                 mData.add(input);
+                // 將資料交給adapter
+                adapter = new MyAdapter(mData);
+                // 設置adapter給recycler_view
+                recycler_view.setAdapter(adapter);
             }
         });
 
