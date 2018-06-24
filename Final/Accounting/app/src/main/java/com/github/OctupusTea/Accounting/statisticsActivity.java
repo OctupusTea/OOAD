@@ -62,6 +62,7 @@ public class statisticsActivity extends AppCompatActivity {
         String str_m;
         String str_d;
         DatePart datePart = new DatePart();
+        Double sum;
         TextView textView_sum = (TextView) findViewById(R.id.textView5);
         switch(choice){
             case 1:
@@ -69,7 +70,7 @@ public class statisticsActivity extends AppCompatActivity {
                 Date curDate_1 =  new Date(System.currentTimeMillis());
                 str_y = formatter.format(curDate_1); //年
                 datePart.setYear(str_y);
-                double sum = sAdapter.getSumOfAllCategory( "year", datePart );
+                sum = sAdapter.getSumOfAllCategory( "year", datePart );
                 textView_sum.setText( sum.toString( ) );
                 // List<Statistics> sumOfCategoryList_1 = sAdapter.getSumOfEachCategory("year", datePart);
                 // textView_sum.setText(sumOfCategoryList_1);
@@ -83,8 +84,8 @@ public class statisticsActivity extends AppCompatActivity {
                 str_m= formatter_m.format(curDate_2); //月
                 datePart.setYear(str_y);
                 datePart.setMonth(str_m);
-                List<Statistics> sumOfCategoryList_2 = sAdapter.getSumOfEachCategory("month", datePart);
-                textView_sum.setText(sumOfCategoryList_2);
+                sum = sAdapter.getSumOfAllCategory("month", datePart);
+                textView_sum.setText(sum.toString());
                 break;
             default:
                 formatter = new SimpleDateFormat ("yyyy/MM/dd");
@@ -98,8 +99,8 @@ public class statisticsActivity extends AppCompatActivity {
                 datePart.setYear(str_y);
                 datePart.setMonth(str_m);
                 datePart.setMonth(str_d);
-                List<Statistics> sumOfCategoryList_3 = sAdapter.getSumOfEachCategory("day", datePart);
-                textView_sum.setText(sumOfCategoryList_3);
+                sum = sAdapter.getSumOfAllCategory("day", datePart);
+                textView_sum.setText(sum.toString());
         }
         Date curDate =  new Date(System.currentTimeMillis());
         String str = formatter.format(curDate);

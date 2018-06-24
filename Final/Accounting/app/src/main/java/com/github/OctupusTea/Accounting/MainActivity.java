@@ -338,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
 				RunActivity( alarmSetting.class );
 				return true;
 			case R.id.action_settings3:
-				RunActivity( BackupActivity.class); // TODO: add backup activity here
+				RunActivity( BackupActivity.class ); // TODO: add backup activity here
 				return true;
         }
 
