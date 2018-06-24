@@ -33,7 +33,7 @@
             android:label="@string/title_activity_categoryView"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".accountView"
+            android:name=".AccountView"
             android:label="@string/title_activity_accountView"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -41,7 +41,7 @@
             android:label="@string/title_activity_alarmSetting"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".accountAdd"
+            android:name=".AccountAdd"
             android:label="@string/title_activity_accountAdd"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -57,7 +57,7 @@
             android:label="@string/title_activity_patternLock"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".passwordSetting"
+            android:name=".PasswordSetting"
             android:label="@string/title_activity_passwordSetting"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -65,7 +65,7 @@
             android:label="AlarmReceiver"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <receiver android:name=".alarmReceiver">
+        <receiver android:name=".AlarmReceiver">
             <intent-filter>
                 <action android:name="accountingNotify"/>
             </intent-filter>

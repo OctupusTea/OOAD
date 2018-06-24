@@ -12,9 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.lang.reflect.Type;
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -75,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this, accountView.class);
+                intent.setClass(MainActivity.this, AccountView.class);
                 startActivity(intent);
             }
         });
