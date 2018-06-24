@@ -64,6 +64,7 @@ public class statisticsActivity extends AppCompatActivity {
         String str_m;
         String str_d;
         DatePart datePart = new DatePart();
+<<<<<<< HEAD
         double sum;
         double income;
         double balance;
@@ -71,14 +72,23 @@ public class statisticsActivity extends AppCompatActivity {
         TextView textView_income = (TextView) findViewById(R.id.textView5);
         TextView textView_balance = (TextView) findViewById(R.id.textView9);
 
+=======
+        Double sum;
+        TextView textView_sum = (TextView) findViewById(R.id.textView5);
+>>>>>>> 75706df6ba65b323dc1c7eac27403cebf2a515ca
         switch(choice){
             case 1:
                 formatter = new SimpleDateFormat ("yyyy");
                 Date curDate_1 =  new Date(System.currentTimeMillis());
                 str_y = formatter.format(curDate_1); //年
                 datePart.setYear(str_y);
+<<<<<<< HEAD
                 sum = sAdapter.getSumOfAllCategory( "year", datePart ); //支出
                 textView_sum.setText(Double.valueOf(sum).toString());
+=======
+                sum = sAdapter.getSumOfAllCategory( "year", datePart );
+                textView_sum.setText( sum.toString( ) );
+>>>>>>> 75706df6ba65b323dc1c7eac27403cebf2a515ca
                 // List<Statistics> sumOfCategoryList_1 = sAdapter.getSumOfEachCategory("year", datePart);
                 // textView_sum.setText(sumOfCategoryList_1);
                 income = sAdapter.getEachCategory( "year", datePart, category[6] ); //收入
@@ -100,6 +110,7 @@ public class statisticsActivity extends AppCompatActivity {
                 str_m= formatter_m.format(curDate_2); //月
                 datePart.setYear(str_y);
                 datePart.setMonth(str_m);
+<<<<<<< HEAD
                 sum = sAdapter.getSumOfAllCategory( "month", datePart ); //支出
                 textView_sum.setText(Double.valueOf(sum).toString());
                 // List<Statistics> sumOfCategoryList_2 = sAdapter.getSumOfEachCategory("month", datePart);
@@ -113,6 +124,10 @@ public class statisticsActivity extends AppCompatActivity {
                     data[i]=sAdapter.getEachCategory( "month", datePart,category[i] );
                 }
 
+=======
+                sum = sAdapter.getSumOfAllCategory("month", datePart);
+                textView_sum.setText(sum.toString());
+>>>>>>> 75706df6ba65b323dc1c7eac27403cebf2a515ca
                 break;
             default:
                 formatter = new SimpleDateFormat ("yyyy/MM/dd");
@@ -126,6 +141,7 @@ public class statisticsActivity extends AppCompatActivity {
                 datePart.setYear(str_y);
                 datePart.setMonth(str_m);
                 datePart.setMonth(str_d);
+<<<<<<< HEAD
                 sum = sAdapter.getSumOfAllCategory( "day", datePart );
                 textView_sum.setText(Double.valueOf(sum).toString());
                 //List<Statistics> sumOfCategoryList_3 = sAdapter.getSumOfEachCategory("day", datePart);
@@ -138,6 +154,10 @@ public class statisticsActivity extends AppCompatActivity {
                 for(int i=0;i<7;i++){
                     data[i]=sAdapter.getEachCategory( "day", datePart,category[i] );
                 }
+=======
+                sum = sAdapter.getSumOfAllCategory("day", datePart);
+                textView_sum.setText(sum.toString());
+>>>>>>> 75706df6ba65b323dc1c7eac27403cebf2a515ca
         }
         Date curDate =  new Date(System.currentTimeMillis());
         String str = formatter.format(curDate);

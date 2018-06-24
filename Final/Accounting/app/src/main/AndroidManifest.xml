@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.github.OctupusTea.Accounting">
+    package="com.github.OctupusTea.Accounting"
+    android:installLocation="internalOnly"
+    android:versionCode="1"
+    android:versionName="1.0">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -13,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -59,9 +64,16 @@
             android:name=".alarmPick"
             android:label="AlarmReceiver"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <receiver android:name=".alarmReceiver">
             <intent-filter>
                 <action android:name="accountingNotify"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".alarmInitReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
     </application>
