@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.lang.reflect.Type;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                intent.setClass(MainActivity.this, AccountView.class);
+                intent.setClass(MainActivity.this, accountView.class);
                 startActivity(intent);
             }
         });
@@ -336,9 +338,7 @@ public class MainActivity extends AppCompatActivity {
 				RunActivity( alarmSetting.class );
 				return true;
 			case R.id.action_settings3:
-			    Intent intent = new Intent(this, BackupActivity.class);
-			    startActivity(intent);
-				//RunActivity( BackupActivity.class );
+				RunActivity( BackupActivity.class ); // TODO: add backup activity here
 				return true;
         }
 

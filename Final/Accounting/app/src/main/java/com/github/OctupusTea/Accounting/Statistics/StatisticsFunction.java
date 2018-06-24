@@ -54,27 +54,12 @@ public abstract class StatisticsFunction {
 	{
 		List< Statistics > sumList = getSumOfEachCategory( dateType, datepart );
 		double sum = 0.0;
-        String category="收入";
+
 		for( Statistics i : sumList )
 		{
-            if(!category.equals(i.getCategory())){
-                sum += i.getSum( );
-            }
+			sum += i.getSum( );
 		}
 
 		return sum;
 	}
-
-    public double getEachCategory( String dateType, DatePart datepart, String category )
-    {
-        List< Statistics > EachSumList = getSumOfEachCategory( dateType, datepart );
-        double eachSum = 0.0;
-        for( Statistics s : EachSumList )
-        {
-            if(category.equals(s.getCategory())){
-                eachSum += s.getSum( );
-            }
-        }
-        return eachSum;
-    }
 }

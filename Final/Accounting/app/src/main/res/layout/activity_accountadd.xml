@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.github.OctupusTea.Accounting.AccountAdd">
+    tools:context="com.github.OctupusTea.Accounting.accountAdd">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/fab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">

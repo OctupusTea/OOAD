@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
-public class AccountView extends Activity {
+public class accountView extends Activity {
 
     private RecyclerView recycler_view;
     private MyAdapter adapter;
