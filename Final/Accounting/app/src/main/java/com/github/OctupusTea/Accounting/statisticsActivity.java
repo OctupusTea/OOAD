@@ -18,10 +18,16 @@ import org.achartengine.model.SeriesSelection;
 import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 
+import com.github.OctupusTea.Accounting.DBAdapter.StatisticsAdapter;
+import com.github.OctupusTea.Accounting.Data.DatePart;
+import com.github.OctupusTea.Accounting.Data.Statistics;
+import com.github.OctupusTea.Accounting.Statistics.StatisticsFunction;
+
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import static android.graphics.Color.*;
@@ -34,16 +40,13 @@ public class statisticsActivity extends AppCompatActivity {
     double data[] = new double[] { 2000, 1000, 6000, 1280, 6000,2000,22000 };
 
     private CategorySeries mSeries = new CategorySeries("");// PieChart的DataSet
-    // 其实就是一些键值对，跟Map使用方法差不多
 
-    private DefaultRenderer mRenderer = new DefaultRenderer();// PieChart的主要描绘器
+    private DefaultRenderer mRenderer = new DefaultRenderer();// PieChart的主要描繪器
 
-    private GraphicalView mChartView;// 用来显示PieChart 需要在配置文件Manifest中添加
-    // <activity
-    // android:name="org.achartengine.GraphicalActivity"
-    // />
+    private GraphicalView mChartView;// 用來顯示PieChart 需要在配置文件Manifest中添加
 
     private LinearLayout mLinear;
+    private StatisticsAdapter sAdapter;
 
     int onetime=1;    // 第一次點箭頭
     int slt=3;    // 選擇年or月or日button
@@ -52,15 +55,49 @@ public class statisticsActivity extends AppCompatActivity {
 
     public void token (int choice){    // 選擇年or月or日button
         SimpleDateFormat formatter;
+        SimpleDateFormat formatter_y;
+        SimpleDateFormat formatter_m;
+        SimpleDateFormat formatter_d;
+        String str_y;
+        String str_m;
+        String str_d;
+        DatePart datePart = new DatePart();
+        TextView textView_sum = (TextView) findViewById(R.id.textView5);
         switch(choice){
             case 1:
                 formatter = new SimpleDateFormat ("yyyy");
+                Date curDate_1 =  new Date(System.currentTimeMillis());
+                str_y = formatter.format(curDate_1); //年
+                datePart.setYear(str_y);
+                List<Statistics> sumOfCategoryList_1 = sAdapter.getSumOfEachCategory("year", datePart);
+                textView_sum.setText(sumOfCategoryList_1);
                 break;
             case 2:
                 formatter = new SimpleDateFormat ("yyyy/MM");
+                formatter_y = new SimpleDateFormat ("yyyy");
+                formatter_m = new SimpleDateFormat ("MM");
+                Date curDate_2 =  new Date(System.currentTimeMillis());
+                str_y = formatter_y.format(curDate_2); //年
+                str_m= formatter_m.format(curDate_2); //月
+                datePart.setYear(str_y);
+                datePart.setMonth(str_m);
+                List<Statistics> sumOfCategoryList_2 = sAdapter.getSumOfEachCategory("month", datePart);
+                textView_sum.setText(sumOfCategoryList_2);
                 break;
             default:
                 formatter = new SimpleDateFormat ("yyyy/MM/dd");
+                formatter_y = new SimpleDateFormat ("yyyy");
+                formatter_m = new SimpleDateFormat ("MM");
+                formatter_d = new SimpleDateFormat ("dd");
+                Date curDate_3 =  new Date(System.currentTimeMillis());
+                str_y = formatter_y.format(curDate_3);
+                str_m= formatter_m.format(curDate_3);
+                str_d= formatter_d.format(curDate_3);
+                datePart.setYear(str_y);
+                datePart.setMonth(str_m);
+                datePart.setMonth(str_d);
+                List<Statistics> sumOfCategoryList_3 = sAdapter.getSumOfEachCategory("day", datePart);
+                textView_sum.setText(sumOfCategoryList_3);
         }
         Date curDate =  new Date(System.currentTimeMillis());
         String str = formatter.format(curDate);
@@ -151,12 +188,12 @@ public class statisticsActivity extends AppCompatActivity {
         mLinear = (LinearLayout) findViewById(R.id.chart);
         mLinear.setBackgroundColor(WHITE);
 
-        //mRenderer.setZoomButtonsVisible(true);// 显示放大缩小功能按钮
-        mRenderer.setShowLegend(false);//不显示底部说明
-        mRenderer.setStartAngle(180);// 设置为水平开始
-        mRenderer.setDisplayValues(true);// 显示数据
-        mRenderer.setLabelsTextSize(40);//设置标签字体大小
-        mRenderer.setLabelsColor(BLACK); //设置标签字体顏色
+        //mRenderer.setZoomButtonsVisible(true);// 顯示放大縮小功能按鈕
+        mRenderer.setShowLegend(false);//不顯示底部說明
+        mRenderer.setStartAngle(180);// 設置為水平開始
+        mRenderer.setDisplayValues(true);//
+        mRenderer.setLabelsTextSize(40);//顯示數據顯示標籤字體大小
+        mRenderer.setLabelsColor(BLACK); //設置標籤字體顏色
 
         mSeries.add("食", data[0]);
         mSeries.add("衣", data[1]);
@@ -169,25 +206,26 @@ public class statisticsActivity extends AppCompatActivity {
 
         for (int i = 0; i < data.length; i++) {
             SimpleSeriesRenderer renderer = new SimpleSeriesRenderer();
-            renderer.setChartValuesFormat(NumberFormat.getCurrencyInstance());// 设置百分比
-            //mSeries.add("示例 " + (i + 1), data[i]);// 设置种类名称和对应的数值，前面是（key,value）键值对
+            renderer.setChartValuesFormat(NumberFormat.getCurrencyInstance());// 設置百分比
+            //mSeries.add("示例 " + (i + 1), data[i]);//mSeries.add("示例 " + (i + 1), data[i]);
+            // 設置種類名稱和對應的數值，前面是（key,value）鍵值對
             if (i < COLORS.length) {
-                renderer.setColor(COLORS[i]);// 设置描绘器的颜色
+                renderer.setColor(COLORS[i]);// 設置描繪器的顏色
             } else {
-                renderer.setColor(getRandomColor());// 设置描绘器的颜色
+                renderer.setColor(getRandomColor());// 設置描繪器的顏色
             }
-            mRenderer.setChartTitleTextSize(14);// 设置饼图标题大小
-            mRenderer.addSeriesRenderer(renderer);// 将最新的描绘器添加到DefaultRenderer中
+            mRenderer.setChartTitleTextSize(14);// 設置圓餅圖標題大小
+            mRenderer.addSeriesRenderer(renderer);// 將最新的描繪器添加到DefaultRenderer中
         }
-        mChartView = ChartFactory.getPieChartView(getApplicationContext(), mSeries, mRenderer);// 构建mChartView
+        mChartView = ChartFactory.getPieChartView(getApplicationContext(), mSeries, mRenderer);// 建構mChartView
         mLinear.addView((View)mChartView, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
 
-        mRenderer.setClickEnabled(true);// 允许点击事件
+        mRenderer.setClickEnabled(true);// 允許點擊事件
         mChartView.setOnClickListener(new View.OnClickListener() {// 具体内容
             @Override
             public void onClick(View v) {
                 SeriesSelection seriesSelection = mChartView
-                        .getCurrentSeriesAndPoint();// 获取当前的类别和指针
+                        .getCurrentSeriesAndPoint();// 獲取當前的類別與指標
                 if (seriesSelection == null) {
                     Toast.makeText(getApplicationContext(),
                             "您未選擇數據", Toast.LENGTH_SHORT).show();
@@ -202,7 +240,7 @@ public class statisticsActivity extends AppCompatActivity {
         });
     }
 
-    private int getRandomColor() {// 分别产生RBG数值
+    private int getRandomColor() {// 分別產生RGB數值
         Random random = new Random();
         int R = random.nextInt(255);
         int G = random.nextInt(255);

@@ -24,9 +24,9 @@ public class StatisticsAdapter extends StatisticsFunction {
 
 
     @Override
-    public List<Record> getDataByYear(String account, String year) {
+    public List<Record> getDataByYear(String year) {
         List<Record> records = new ArrayList<Record>();
-        String where = String.format(AccountingDBHelper.FIELD_ACCOUNT + "=\'%s\' AND " + AccountingDBHelper.FIELD_DATE + ">=\'%s\' AND " + AccountingDBHelper.FIELD_DATE + "<=\'%s\'", account, year + "-01-01", year + "-12-31");
+        String where = String.format(AccountingDBHelper.FIELD_DATE + ">=\'%s\' AND " + AccountingDBHelper.FIELD_DATE + "<=\'%s\'", year + "-01-01", year + "-12-31");
         Cursor cursor = db.query(AccountingDBHelper.TABLE_NAME, null, where, null, null, null, null, null);
         while (cursor.moveToNext()){
             records.add(dbFunction.getRecord(cursor));
@@ -36,9 +36,9 @@ public class StatisticsAdapter extends StatisticsFunction {
     }
 
     @Override
-    public List<Record> getDataByMonth(String account, String year, String month) {
+    public List<Record> getDataByMonth(String year, String month) {
         List<Record> records = new ArrayList<Record>();
-        String where = String.format(AccountingDBHelper.FIELD_ACCOUNT + "=\'%s\' AND " + AccountingDBHelper.FIELD_DATE + ">=\'%s\' AND " + AccountingDBHelper.FIELD_DATE + "<=\'%s\'", account, year + "-" + month + "-01", year + "-" + month + "-31");
+        String where = String.format(AccountingDBHelper.FIELD_DATE + ">=\'%s\' AND " + AccountingDBHelper.FIELD_DATE + "<=\'%s\'", year + "-" + month + "-01", year + "-" + month + "-31");
         Cursor cursor = db.query(AccountingDBHelper.TABLE_NAME, null, where, null, null, null, null, null);
         while (cursor.moveToNext()){
             records.add(dbFunction.getRecord(cursor));
@@ -48,9 +48,9 @@ public class StatisticsAdapter extends StatisticsFunction {
     }
 
     @Override
-    public List<Record> getDataByDay(String account, String year, String month, String day) {
+    public List<Record> getDataByDay(String year, String month, String day) {
         List<Record> records = new ArrayList<Record>();
-        String where = String.format(AccountingDBHelper.FIELD_ACCOUNT + "=\'%s\' AND " + AccountingDBHelper.FIELD_DATE + ">=\'%s\' AND " + AccountingDBHelper.FIELD_DATE + "<=\'%s\'", account, year + "-" + month + "-" + day, year + "-" + month + "-" + day);
+        String where = String.format(AccountingDBHelper.FIELD_DATE + ">=\'%s\' AND " + AccountingDBHelper.FIELD_DATE + "<=\'%s\'", year + "-" + month + "-" + day, year + "-" + month + "-" + day);
         Cursor cursor = db.query(AccountingDBHelper.TABLE_NAME, null, where, null, null, null, null, null);
         while (cursor.moveToNext()){
             records.add(dbFunction.getRecord(cursor));

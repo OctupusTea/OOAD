@@ -2,22 +2,18 @@ package com.github.OctupusTea.Accounting;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -106,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         cal_0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calc.NumericPress( "0" );
+                calc.NumericPress("0");
             }
         });
 
@@ -226,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
     class Calc
     {
         private double valueA = Double.NaN;
-        private double valueB = 0.0;
+        private double valueB;
 
         public static final char PLUS = '+';
         public static final char MINUS = '-';
@@ -234,83 +230,84 @@ public class MainActivity extends AppCompatActivity {
         public static final char DIV = '/';
         public static final char EQ = '=';
 
-        private char current_op = EQ;
+        private char current_op;
 
-        private EditText shown = findViewById(R.id.cal_calculation_input);
-        private EditText op_shown = findViewById(R.id.cal_op_slot);
+        private EditText shown = findViewById( R.id.cal_input );
+        private EditText info = findViewById( R.id.cal_info );
 
-        DecimalFormat outputFormat = new DecimalFormat( "#.###" );
+        private DecimalFormat outputFormat = new DecimalFormat( "#.###" );
 
-        public void NumericPress( String button )
+        public void NumericPress( String buttonPress )
         {
-            if( current_op == EQ )
-            {
-                shown.setText("");
-            }
-
-            shown.setText(shown.getText()+button);
+			shown.setText( shown.getText() + buttonPress );
         }
 
-        public void Calculate( char op )
-        {
-            if(!Double.isNaN(valueA))
-            {
-                valueB = Double.parseDouble(shown.getText().toString());
-                shown.setText("");
-                op_shown.setText(new Character(op).toString());
+		public void Calculate( char op )
+		{
+			if( op == '=' )
+			{
+				Calculate();
+				info.setText( info.getText().toString() + outputFormat.format(valueB)+" = ");
+				shown.setText(outputFormat.format(valueA));
+				valueA = Double.NaN;
+				current_op = EQ;
+			}
+			else
+			{
+				Calculate();
+				current_op = op;
+				info.setText(outputFormat.format(valueA) + "" + op);
+				shown.setText(null);
+			}
+		}
 
-                if (op != EQ)
-                {
-                    current_op = op;
-                }
-                switch(current_op)
-                {
-                    case PLUS:
-                        valueA = this.valueA + valueB;
-                        break;
-                    case MINUS:
-                        valueA = this.valueA - valueB;
-                        break;
-                    case MULT:
-                        valueA = this.valueA * valueB;
-                        break;
-                    case DIV:
-                        valueA = this.valueA / valueB;
-                        break;
-                }
-                if(op == EQ)
-                {
-                    shown.setText(outputFormat.format(valueA));
-                    current_op = '=';
-                }
-                else
-                {
-                    shown.setText("");
-                }
+        public void Calculate( ) {
+			if (!Double.isNaN(valueA)) {
+				try
+				{
+					valueB = Double.parseDouble(shown.getText().toString());
+				}
+				catch( Exception e )
+				{
+					valueB = 0;
+					return;
+				}
 
-                valueA = Double.NaN;
-            }
-            else
-            {
-                try
-                {
-                    valueA = Double.parseDouble(shown.getText().toString());
-                }
-                catch (Exception e){}
+				shown.setText(null);
 
-                current_op = op;
-                op_shown.setText(new Character(op).toString());
-                shown.setText("");
-            }
-        }
+				switch (current_op) {
+					case PLUS:
+						valueA = this.valueA + valueB;
+						break;
+					case MINUS:
+						valueA = this.valueA - valueB;
+						break;
+					case MULT:
+						valueA = this.valueA * valueB;
+						break;
+					case DIV:
+						valueA = this.valueA / valueB;
+						break;
+				}
+			}
+			else
+			{
+				try {
+					valueA = Double.parseDouble(shown.getText().toString());
+				} catch (Exception e) {
+				}
+				;
+			}
+		}
 
-        public void Clear( )
-        {
-            valueA = Double.NaN;
-            valueB = 0.0;
-            current_op = EQ;
-            shown.setText(null);
-        }
+		public void Clear( )
+		{
+			valueA = Double.NaN;
+			valueB = 0.0;
+
+			info.setText("");
+			shown.setText("");
+		}
     }
 
     @Override  // menu UI

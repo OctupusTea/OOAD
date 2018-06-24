@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.github.OctupusTea.Accounting.R;
 
-public class accountadd extends AppCompatActivity {
+public class accountAdd extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
