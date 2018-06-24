@@ -2,30 +2,82 @@ package com.github.OctupusTea.Accounting;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TimePicker;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class alarmPick extends AppCompatActivity {
 	TimePicker alarmTimePicker;
-	PendingIntent pendingIntent;
-	AlarmManager alarmManager;
+	int callerID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_alarm_receiver);
+		setContentView(R.layout.activity_alarm_pick);
 		alarmTimePicker = findViewById( R.id.timePicker );
-		alarmManager = (AlarmManager) getSystemService( ALARM_SERVICE );
+
+		callerID = getIntent( ).getIntExtra( "callerID", 0xFFFFFFFF );
 	}
 
-	public void OnToggleClicked( View view )
+	public void onClick( View view )
+	{
+		Calendar calendar = Calendar.getInstance();
+
+		calendar.set( Calendar.HOUR_OF_DAY, alarmTimePicker.getHour() );
+		calendar.set( Calendar.MINUTE, alarmTimePicker.getMinute() );
+
+		if( calendar.before( Calendar.getInstance() ) )
+		{
+			calendar.add( Calendar.DATE, 1 );
+		}
+
+		SimpleDateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd-HH:mm" );
+		String date = dateFormat.format( calendar.getTime( ) );
+
+		Intent resultData = new Intent( );
+		resultData.putExtra( "date", date );
+		resultData.putExtra( "callerID", callerID );
+		setResult( RESULT_OK, resultData );
+		finish();
+	}
+
+	/*public void onClickSetup( View view )
+	{
+		long time;
+
+		if( ((ToggleButton)view).isChecked( ) )
+		{
+			Calendar calendar = Calendar.getInstance();
+
+			calendar.set(Calendar.HOUR_OF_DAY, alarmTimePicker.getHour());
+			calendar.set(Calendar.MINUTE, alarmTimePicker.getMinute());
+			calendar.set(Calendar.SECOND, 0);
+
+			if (calendar.before(Calendar.getInstance())) {
+				calendar.add(Calendar.DATE, 1);
+			}
+
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
+
+			Intent intent = new Intent(this, alarmReceiver.class);
+			intent.addCategory("D" + dateFormat.format(calendar.DATE));
+			intent.putExtra("msg", "accountingNotify");
+
+			PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+			AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+			alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+		}
+	}*/
+
+	/*public void OnToggleClicked( View view )
 	{
 		long time;
 
@@ -64,5 +116,5 @@ public class alarmPick extends AppCompatActivity {
 				Toast.makeText( alarmPick.this, "ALARM OFF", Toast.LENGTH_SHORT ).show( );
 			}
 		}
-	}
+	}*/
 }

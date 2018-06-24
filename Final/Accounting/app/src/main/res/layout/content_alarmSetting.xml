@@ -11,73 +11,152 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <Switch
-            android:id="@+id/switch0"
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="26sp"
-            android:gravity="center" />
-    </LinearLayout>
+            android:columnCount="1"
+            android:rowCount="5"
+            tools:layout_editor_absoluteX="66dp"
+            tools:layout_editor_absoluteY="156dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="vertical">
+            <!-- Row 1 -->
 
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text=""
-            android:textSize="26sp" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="vertical">
+                <Button
+                    android:id="@+id/alarmButton0"
+                    android:layout_width="450dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:onClick="onClick"/>
 
-        <Switch
-            android:id="@+id/switch2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="26sp"
-            android:gravity="center"/>
-    </LinearLayout>
+                <Switch
+                    android:id="@+id/alarmSwitch0"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center" />
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="vertical">
+            <!-- Row 2 -->
 
-        <Switch
-            android:id="@+id/switch3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="26sp"
-            android:gravity="center"/>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
+                <Button
+                    android:id="@+id/alarmButton1"
+                    android:layout_width="450dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:onClick="onClick" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="vertical">
+                <Switch
+                    android:id="@+id/alarmSwitch1"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center" />
+            </LinearLayout>
 
-        <Switch
-            android:id="@+id/switch4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textSize="26sp"
-            android:gravity="center"/>
+            <!-- Row 3 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/alarmButton2"
+                    android:layout_width="450dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:onClick="onClick" />
+
+                <Switch
+                    android:id="@+id/alarmSwitch2"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- Row 4 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/alarmButton3"
+                    android:layout_width="450dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:onClick="onClick"/>
+
+                <Switch
+                    android:id="@+id/alarmSwitch3"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center" />
+            </LinearLayout>
+
+            <!-- Row 5 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <Button
+                    android:id="@+id/alarmButton4"
+                    android:layout_width="450dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:onClick="onClick" />
+
+                <Switch
+                    android:id="@+id/alarmSwitch4"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center" />
+            </LinearLayout>
+        </GridLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -86,7 +165,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button21"
+            android:id="@+id/alarmConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="確認"

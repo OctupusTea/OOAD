@@ -8,16 +8,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class alarmSetting extends AppCompatActivity {
 
-    @Override
+	Date[ ] alarmDate = new Date[ 5 ];
+	static final SimpleDateFormat rawAlarmFormat = new SimpleDateFormat( "yyyy-MM-dd-HH:mm" );
+	static final SimpleDateFormat timeFormat = new SimpleDateFormat( "h:mm a" );
+	SharedPreferences alarmPreferences = getSharedPreferences("alarmPreferences", MODE_PRIVATE);
+
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarmsetting);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button remindersettingBtn = (Button) findViewById(R.id.button21);
+        Button remindersettingBtn = (Button) findViewById(R.id.alarmConfirm );
         remindersettingBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -28,24 +38,68 @@ public class alarmSetting extends AppCompatActivity {
             }
         });
 
-		SharedPreferences alarmPreferences = getSharedPreferences( "alarmPreferences", MODE_PRIVATE );
-		String[ ] alarmTime = new String[ 5 ];
+		int[ ] alarmButtons_idList = {R.id.alarmButton0, R.id.alarmButton1, R.id.alarmButton2, R.id.alarmButton3, R.id.alarmButton4};
+
 		for( int i = 0; i < 5; ++i )
 		{
-			alarmTime[ i ] = alarmPreferences.getString( "alarmTime" + i, "" );
-			if( alarmTime[ i ].equals( "" ) )
+			Button alarmButton = findViewById( alarmButtons_idList[ i ] );
+			String dateString = alarmPreferences.getString( "alarmDate" + i, "" );
+			Date alarmDate = new Date( );
+
+			try
 			{
-				alarmPreferences.edit( ).putString( "alarmTime" + i, "08:00" );
+				alarmDate = rawAlarmFormat.parse( dateString );
+			}
+			catch( ParseException e )
+			{
+				alarmDate = Calendar.getInstance( ).getTime( );
+				alarmPreferences.edit( ).putString( "alarmDate" + alarmButton.getId( ), rawAlarmFormat.format( alarmDate ) );
+			}
+
+			alarmButton.setText( timeFormat.format( alarmDate ) );
+		}
+
+		alarmPreferences.edit().commit();
+	}
+
+    public void onClick( View view )
+	{
+		Intent intent = new Intent();
+		intent.setClass(alarmSetting.this, alarmPick.class );
+		intent.putExtra( "callerID", view.getId() );
+		startActivityForResult( intent, 0xFF0E );
+	}
+
+	public void onActivityResult( int requestCode, int resultCode, Intent data )
+	{
+		if( requestCode == 0xFF0E )
+		{
+			if( resultCode == RESULT_OK )
+			{
+				String dateString = data.getStringExtra( "date" );
+				int callerID = data.getIntExtra( "callerID", 0xFFFFFFFF );
+				Button alarmButton = findViewById( callerID );
+				Date alarmDate;
+
+				try
+				{
+					alarmDate = rawAlarmFormat.parse( dateString );
+				}
+				catch( ParseException e )
+				{
+					alarmDate = Calendar.getInstance( ).getTime( );
+				}
+
+				alarmPreferences.edit().putString("alarmDate" + callerID, rawAlarmFormat.format( alarmDate ) );
+				alarmButton.setText( timeFormat.format( alarmDate ) );
+
+				alarmPreferences.edit( ).commit( );
 			}
 		}
-		alarmPreferences.edit( ).commit( );
+	}
 
-        Switch[ ] switches = new Switch[ 5 ];
-        int[ ] switches_idList = { R.id.switch0, R.id.switch1, R.id.switch2, R.id.switch3, R.id.switch4 };
-        for( int i = 0; i < 5; ++i )
-		{
-			switches[ i ] = findViewById( switches_idList[ i ] );
-			switches[ i ].setText( alarmTime[ i ] );
-		}
-    }
+	public void setAlarm( Date alarmDate )
+	{
+		// TODO here
+	}
 }

@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.github.OctupusTea.Accounting">
+    package="com.github.OctupusTea.Accounting"
+    android:installLocation="internalOnly"
+    android:versionCode="1"
+    android:versionName="1.0">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED">
+        <reciever android:name=".alarmInitReceiver">
+            <action android:name="android.intent.action.BOOT_COMPLETED"/>
+        </reciever>
+    </uses-permission>
+
 
     <application
         android:allowBackup="true"
