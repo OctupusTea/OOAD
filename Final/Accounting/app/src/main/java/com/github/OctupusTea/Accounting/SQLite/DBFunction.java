@@ -41,6 +41,11 @@ public class DBFunction {
         return db.update(AccountingDBHelper.TABLE_NAME, contentValues, where, null) > 0;
     }
 
+    public boolean delete(Record record) {
+        String where = AccountingDBHelper.KEY_ID + "=" + Integer.toString(record.getId());
+        return db.delete(AccountingDBHelper.TABLE_NAME, where, null) > 0;
+    }
+
     public Record getById(int id) {
             Record record = new Record();
             String where = AccountingDBHelper.KEY_ID + "=" + id;
