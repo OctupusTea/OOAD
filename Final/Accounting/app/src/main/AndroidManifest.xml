@@ -39,7 +39,7 @@
             android:label="@string/title_activity_accountadd"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.github.OctupusTea.Accounting.statistics"
+            android:name="com.github.OctupusTea.Accounting.statisticsActivity"
             android:label="@string/title_activity_statistics"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
