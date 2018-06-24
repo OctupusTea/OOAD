@@ -155,8 +155,8 @@
                 android:weightSum="4">
 
                 <EditText
-                    android:id="@+id/cal_op_slot"
-                    android:layout_width="154dp"
+                    android:id="@+id/cal_info"
+                    android:layout_width="230dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_weight="1"
@@ -174,8 +174,8 @@
                     android:textSize="26sp" />
 
                 <EditText
-                    android:id="@+id/cal_calculation_input"
-                    android:layout_width="309dp"
+                    android:id="@+id/cal_input"
+                    android:layout_width="230dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_weight="1"
