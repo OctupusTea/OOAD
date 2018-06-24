@@ -62,15 +62,16 @@ public class statisticsActivity extends AppCompatActivity {
         String str_m;
         String str_d;
         DatePart datePart = new DatePart();
-        TextView textView_sum = (TextView) findViewById(R.id.textView5);
+        double sum;
+        TextView textView_sum = (TextView) findViewById(R.id.textView7);
         switch(choice){
             case 1:
                 formatter = new SimpleDateFormat ("yyyy");
                 Date curDate_1 =  new Date(System.currentTimeMillis());
                 str_y = formatter.format(curDate_1); //年
                 datePart.setYear(str_y);
-                double sum = sAdapter.getSumOfAllCategory( "year", datePart );
-                textView_sum.setText( sum.toString( ) );
+                sum = sAdapter.getSumOfAllCategory( "year", datePart );
+                textView_sum.setText(Double.valueOf(sum).toString());
                 // List<Statistics> sumOfCategoryList_1 = sAdapter.getSumOfEachCategory("year", datePart);
                 // textView_sum.setText(sumOfCategoryList_1);
                 break;
@@ -83,8 +84,10 @@ public class statisticsActivity extends AppCompatActivity {
                 str_m= formatter_m.format(curDate_2); //月
                 datePart.setYear(str_y);
                 datePart.setMonth(str_m);
-                List<Statistics> sumOfCategoryList_2 = sAdapter.getSumOfEachCategory("month", datePart);
-                textView_sum.setText(sumOfCategoryList_2);
+                sum = sAdapter.getSumOfAllCategory( "month", datePart );
+                textView_sum.setText(Double.valueOf(sum).toString());
+                // List<Statistics> sumOfCategoryList_2 = sAdapter.getSumOfEachCategory("month", datePart);
+                // textView_sum.setText(sumOfCategoryList_2);
                 break;
             default:
                 formatter = new SimpleDateFormat ("yyyy/MM/dd");
@@ -98,8 +101,10 @@ public class statisticsActivity extends AppCompatActivity {
                 datePart.setYear(str_y);
                 datePart.setMonth(str_m);
                 datePart.setMonth(str_d);
-                List<Statistics> sumOfCategoryList_3 = sAdapter.getSumOfEachCategory("day", datePart);
-                textView_sum.setText(sumOfCategoryList_3);
+                sum = sAdapter.getSumOfAllCategory( "day", datePart );
+                textView_sum.setText(Double.valueOf(sum).toString());
+                //List<Statistics> sumOfCategoryList_3 = sAdapter.getSumOfEachCategory("day", datePart);
+                //textView_sum.setText(sumOfCategoryList_3);
         }
         Date curDate =  new Date(System.currentTimeMillis());
         String str = formatter.format(curDate);
@@ -120,18 +125,53 @@ public class statisticsActivity extends AppCompatActivity {
             slt_tmp=slt_now;
         }
         SimpleDateFormat formatter2;
+        SimpleDateFormat formatter_y;
+        SimpleDateFormat formatter_m;
+        SimpleDateFormat formatter_d;
+        String str_y;
+        String str_m;
+        String str_d;
+        DatePart datePart = new DatePart();
+        double sum;
+        TextView textView_sum = (TextView) findViewById(R.id.textView7);
         switch(slt_now){
             case 1:
                 formatter2 = new SimpleDateFormat("yyyy");
                 calendar.add(Calendar.YEAR, direction);
+                Date curDate_1 =  new Date(System.currentTimeMillis());
+                str_y = formatter2.format(curDate_1); //年
+                datePart.setYear(str_y);
+                sum = sAdapter.getSumOfAllCategory( "year", datePart );
+                textView_sum.setText(Double.valueOf(sum).toString());
                 break;
             case 2:
                 formatter2 = new SimpleDateFormat("yyyy/MM");
                 calendar.add(Calendar.MONTH, direction);
+                formatter_y = new SimpleDateFormat ("yyyy");
+                formatter_m = new SimpleDateFormat ("MM");
+                Date curDate_2 =  new Date(System.currentTimeMillis());
+                str_y = formatter_y.format(curDate_2); //年
+                str_m= formatter_m.format(curDate_2); //月
+                datePart.setYear(str_y);
+                datePart.setMonth(str_m);
+                sum = sAdapter.getSumOfAllCategory( "month", datePart );
+                textView_sum.setText(Double.valueOf(sum).toString());
                 break;
             default:
                 formatter2 = new SimpleDateFormat("yyyy/MM/dd");
                 calendar.add(Calendar.DATE, direction);
+                formatter_y = new SimpleDateFormat ("yyyy");
+                formatter_m = new SimpleDateFormat ("MM");
+                formatter_d = new SimpleDateFormat ("dd");
+                Date curDate_3 =  new Date(System.currentTimeMillis());
+                str_y = formatter_y.format(curDate_3);
+                str_m= formatter_m.format(curDate_3);
+                str_d= formatter_d.format(curDate_3);
+                datePart.setYear(str_y);
+                datePart.setMonth(str_m);
+                datePart.setMonth(str_d);
+                sum = sAdapter.getSumOfAllCategory( "day", datePart );
+                textView_sum.setText(Double.valueOf(sum).toString());
         }
         String Ago = formatter2.format(calendar.getTime());
         TextView textView = (TextView) findViewById(R.id.textView3);
