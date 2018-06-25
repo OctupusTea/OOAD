@@ -327,10 +327,14 @@ public class MainActivity extends AppCompatActivity {
         switch ( id )
 		{
 			case R.id.action_settings0:
-				RunActivity( null ); // TODO: add account adding activity here
+				//RunActivity( null ); // TODO: add account adding activity here
+                Intent intent2 = new Intent(this, AccountView.class);
+                startActivity(intent2);
 				return true;
 			case R.id.action_settings1:
-				RunActivity( null ); // TODO: add statistics activity here
+				//RunActivity( null ); // TODO: add statistics activity here
+                Intent intent3 = new Intent(this, StatisticsActivity.class);
+                startActivity(intent3);
 				return true;
 			case R.id.action_settings2:
 				RunActivity( AlarmSetting.class );
@@ -341,7 +345,6 @@ public class MainActivity extends AppCompatActivity {
 				//RunActivity( BackupActivity.class );
 				return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

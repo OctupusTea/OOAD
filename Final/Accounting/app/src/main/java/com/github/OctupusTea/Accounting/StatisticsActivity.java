@@ -32,7 +32,7 @@ import java.util.Random;
 
 import static android.graphics.Color.*;
 
-public class statisticsActivity extends AppCompatActivity {
+public class StatisticsActivity extends AppCompatActivity {
 
 
     private static int[] COLORS = new int[] { Color.RED, Color.GREEN,
@@ -238,7 +238,7 @@ public class statisticsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_statistics);
 
 
         Button btn01 = (Button) findViewById(R.id.button8);
