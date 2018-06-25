@@ -49,7 +49,7 @@ public class StatisticsActivity extends AppCompatActivity {
     private GraphicalView mChartView;// 用來顯示PieChart 需要在配置文件Manifest中添加
 
     private LinearLayout mLinear;
-    private StatisticsAdapter sAdapter = new StatisticsAdapter( this );
+    private StatisticsAdapter sAdapter;
 
     int onetime=1;    // 第一次點箭頭
     int slt=3;    // 選擇年or月or日button
@@ -76,14 +76,14 @@ public class StatisticsActivity extends AppCompatActivity {
         TextView textView_balance = (TextView) findViewById(R.id.textView9);
         TextView textView_date = (TextView) findViewById(R.id.textView3);
 
-        switch(choice){
+        switch( choice ){
             case 1:
                 formatter = new SimpleDateFormat ("yyyy");
 
                 sum = sAdapter.getSumOfAllCategory( "year", datePart ); //支出
                 income = sAdapter.getEachCategory("year", datePart, category[6]); //收入
 
-                for(int i = 0; i < 7; i++ )
+                for( int i = 0; i < 7; i++ )
                 {
                     data[ i ] = sAdapter.getEachCategory( "year", datePart, category[ i ] );
                 }
@@ -120,7 +120,7 @@ public class StatisticsActivity extends AppCompatActivity {
         textView_date.setText( dateString );
     }
 
-    public void arrow (int direction,int slt_now){    //點擊箭頭，調整日期顯示
+    public void arrow (int direction, int slt_now){    //點擊箭頭，調整日期顯示
 
         Date currentDate = new Date( System.currentTimeMillis() );
 
@@ -134,6 +134,18 @@ public class StatisticsActivity extends AppCompatActivity {
             slt_tmp=slt_now;
         }
 
+        switch( slt_now )
+        {
+            case 1:
+                calendar.add( Calendar.YEAR, direction );
+                break;
+            case 2:
+                calendar.add( Calendar.MONTH, direction );
+                break;
+            default:
+                calendar.add( Calendar.DAY_OF_YEAR, direction );
+        }
+
         token( slt_now );
     }
 
@@ -142,6 +154,7 @@ public class StatisticsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
+        sAdapter = new StatisticsAdapter(this);
 
         Button btn01 = (Button) findViewById(R.id.button8);
         Button btn02 = (Button) findViewById(R.id.button7);
@@ -218,7 +231,7 @@ public class StatisticsActivity extends AppCompatActivity {
             mRenderer.addSeriesRenderer(renderer);// 將最新的描繪器添加到DefaultRenderer中
         }
         mChartView = ChartFactory.getPieChartView(getApplicationContext(), mSeries, mRenderer);// 建構mChartView
-        mLinear.addView((View)mChartView, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+        mLinear.addView((View)mChartView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
         mRenderer.setClickEnabled(true);// 允許點擊事件
         mChartView.setOnClickListener(new View.OnClickListener() {// 具体内容

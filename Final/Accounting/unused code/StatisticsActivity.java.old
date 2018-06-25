@@ -240,6 +240,7 @@ public class StatisticsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
 
+        sAdapter = new StatisticsAdapter( this );
 
         Button btn01 = (Button) findViewById(R.id.button8);
         Button btn02 = (Button) findViewById(R.id.button7);
@@ -316,7 +317,7 @@ public class StatisticsActivity extends AppCompatActivity {
             mRenderer.addSeriesRenderer(renderer);// 將最新的描繪器添加到DefaultRenderer中
         }
         mChartView = ChartFactory.getPieChartView(getApplicationContext(), mSeries, mRenderer);// 建構mChartView
-        mLinear.addView((View)mChartView, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+        mLinear.addView((View)mChartView, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
         mRenderer.setClickEnabled(true);// 允許點擊事件
         mChartView.setOnClickListener(new View.OnClickListener() {// 具体内容

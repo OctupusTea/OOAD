@@ -130,6 +130,15 @@ public class AlarmSetting extends AppCompatActivity {
 					alarmDate[ buttonOrder ] = Calendar.getInstance( ).getTime( );
 				}
 
+				String oldAlarmDate = alarmPreferences.getString( "alarmDate" + buttonOrder, "" );
+				if( !oldAlarmDate.equals( rawAlarmFormat.format( alarmDate[ buttonOrder ] ) ) )
+				{
+					boolean alarmSet = alarmPreferences.getBoolean( "alarmSet" + buttonOrder, false );
+					cancelAlarm( (CompoundButton) findViewById( alarmSwitches_idList[ buttonOrder ] ) );
+					alarmPreferences.edit( ).putBoolean( "alarmSet" + buttonOrder, alarmSet )
+									.apply( );
+				}
+
 				alarmPreferences.edit( ).putString("alarmDate" + buttonOrder, rawAlarmFormat.format( alarmDate[ buttonOrder ] ) )
 								.apply( );
 				alarmButton.setText( timeFormat.format( alarmDate[ buttonOrder ] ) );
