@@ -133,7 +133,7 @@ public class StatisticsActivity extends AppCompatActivity {
             calendar.setTime( currentDate );
             slt_tmp=slt_now;
         }
-
+        
         token( slt_now );
     }
 
