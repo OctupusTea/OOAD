@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.media.MediaBrowserCompatUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -120,6 +121,14 @@ public class AlarmSetting extends AppCompatActivity {
 				int callerID = data.getIntExtra( "callerID", 0xFFFFFFFF );
 				Button alarmButton = findViewById( callerID );
 				int buttonOrder = getButtonOrder( alarmButton );
+				boolean alarmSet = alarmPreferences.getBoolean("alarmSet" + buttonOrder, false);
+
+				if ( !rawAlarmFormat.format( alarmDate[ buttonOrder ] ).equals( dateString ) )
+				{
+					cancelAlarm(buttonOrder);
+					alarmPreferences.edit().putBoolean("alarmSet" + buttonOrder, alarmSet)
+									.apply();
+				}
 
 				try
 				{
@@ -127,21 +136,17 @@ public class AlarmSetting extends AppCompatActivity {
 				}
 				catch( ParseException e )
 				{
-					alarmDate[ buttonOrder ] = Calendar.getInstance( ).getTime( );
-				}
-
-				String oldAlarmDate = alarmPreferences.getString( "alarmDate" + buttonOrder, "" );
-				if( !oldAlarmDate.equals( rawAlarmFormat.format( alarmDate[ buttonOrder ] ) ) )
-				{
-					boolean alarmSet = alarmPreferences.getBoolean( "alarmSet" + buttonOrder, false );
-					cancelAlarm( (CompoundButton) findViewById( alarmSwitches_idList[ buttonOrder ] ) );
-					alarmPreferences.edit( ).putBoolean( "alarmSet" + buttonOrder, alarmSet )
-									.apply( );
+					alarmDate[ buttonOrder ] = Calendar.getInstance().getTime();
 				}
 
 				alarmPreferences.edit( ).putString("alarmDate" + buttonOrder, rawAlarmFormat.format( alarmDate[ buttonOrder ] ) )
 								.apply( );
 				alarmButton.setText( timeFormat.format( alarmDate[ buttonOrder ] ) );
+
+				if( alarmSet )
+				{
+					setAlarm( buttonOrder );
+				}
 			}
 		}
 	}
@@ -160,19 +165,17 @@ public class AlarmSetting extends AppCompatActivity {
 
 	public void setAlarm( CompoundButton buttonView )
 	{
-		int switchOrder = getSwitchOrder( buttonView );
+		setAlarm( getSwitchOrder(buttonView) );
+	}
 
+	public void setAlarm( int switchOrder )
+	{
 		alarmPreferences.edit().putBoolean("alarmSet" + switchOrder, true)
 						.apply();
 
-
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime( alarmDate[ switchOrder ] );
-/*
-		calendar.set(Calendar.HOUR_OF_DAY,  );
-		calendar.set(Calendar.MINUTE, alarmTimePicker.getMinute());
-		calendar.set(Calendar.SECOND, 0);
-*/
+
 		if ( calendar.before( Calendar.getInstance( ) ) )
 		{
 			calendar.add( Calendar.DATE, 1 );
@@ -185,26 +188,29 @@ public class AlarmSetting extends AppCompatActivity {
 		PendingIntent pendingIntent = PendingIntent.getBroadcast( getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT );
 
 		AlarmManager alarmManager = ( AlarmManager ) getSystemService( Context.ALARM_SERVICE );
-		alarmManager.setInexactRepeating( AlarmManager.ELAPSED_REALTIME_WAKEUP, calendar.getTimeInMillis() - Calendar.getInstance().getTimeInMillis(), 1000 * 60, pendingIntent );
+		alarmManager.setInexactRepeating( AlarmManager.ELAPSED_REALTIME_WAKEUP, calendar.getTimeInMillis() - Calendar.getInstance().getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent );
 	}
 
-	public void cancelAlarm(CompoundButton buttonView )
+	public void cancelAlarm( CompoundButton buttonView )
 	{
-		int switchOrder = getSwitchOrder( buttonView );
+		cancelAlarm( getSwitchOrder( buttonView ) );
+	}
 
+	public void cancelAlarm( int switchOrder )
+	{
 		alarmPreferences.edit().putBoolean("alarmSet" + switchOrder, false)
 						.apply();
 
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime( alarmDate[ switchOrder ] );
+		calendar.setTime( alarmDate[switchOrder] );
 
-		Intent intent = new Intent( this, AlarmReceiver.class );
-		intent.addCategory( "D" + rawAlarmFormat.format( calendar.getTime() ) );
-		intent.putExtra( "msg", "accountingNotify" );
+		Intent intent = new Intent(this, AlarmReceiver.class);
+		intent.addCategory("D" + rawAlarmFormat.format(calendar.getTime()));
+		intent.putExtra("msg", "accountingNotify");
 
-		PendingIntent pendingIntent = PendingIntent.getBroadcast( getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT );
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-		AlarmManager alarmManager = ( AlarmManager ) getSystemService( Context.ALARM_SERVICE );
-		alarmManager.cancel( pendingIntent );
+		AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+		alarmManager.cancel(pendingIntent);
 	}
 }
