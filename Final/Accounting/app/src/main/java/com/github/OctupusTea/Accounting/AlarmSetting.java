@@ -1,5 +1,8 @@
 package com.github.OctupusTea.Accounting;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,7 +33,7 @@ public class AlarmSetting extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        alarmPreferences = getSharedPreferences("alarmPreferences", MODE_PRIVATE);
+        alarmPreferences = getSharedPreferences("alarmPreferences", MODE_PRIVATE );
 
         Button alarmConfirmButton = (Button) findViewById(R.id.alarmConfirm );
         alarmConfirmButton.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +60,7 @@ public class AlarmSetting extends AppCompatActivity {
 					}
 					else
 					{
-						unsetAlarm( buttonView );
+						cancelAlarm( buttonView );
 					}
 				}
 			});
@@ -68,22 +71,21 @@ public class AlarmSetting extends AppCompatActivity {
 		{
 			Button alarmButton = findViewById( alarmButtons_idList[ i ] );
 			String dateString = alarmPreferences.getString( "alarmDate" + i, "" );
-			Date alarmDate = new Date( );
 
 			try
 			{
-				alarmDate = rawAlarmFormat.parse( dateString );
+				alarmDate[ i ] = rawAlarmFormat.parse( dateString );
 			}
 			catch( ParseException e )
 			{
-				alarmDate = Calendar.getInstance( ).getTime( );
-				alarmPreferences.edit( ).putString( "alarmDate" + alarmButton.getId( ), rawAlarmFormat.format( alarmDate ) );
+				alarmDate[ i ] = Calendar.getInstance( ).getTime( );
+				alarmPreferences.edit( ).putString( "alarmDate" + alarmButton.getId( ), rawAlarmFormat.format( alarmDate[ i ] ) );
 			}
 
-			alarmButton.setText( timeFormat.format( alarmDate ) );
+			alarmButton.setText( timeFormat.format( alarmDate[ i ] ) );
 		}
 
-		alarmPreferences.edit().commit();
+		alarmPreferences.edit().apply();
 	}
 
     public void onClick( View view )
@@ -92,6 +94,18 @@ public class AlarmSetting extends AppCompatActivity {
 		intent.setClass(AlarmSetting.this, AlarmPick.class );
 		intent.putExtra( "callerID", view.getId() );
 		startActivityForResult( intent, 0xFF0E );
+	}
+
+	private int getButtonOrder( Button buttonView )
+	{
+		int buttonOrder = 0;
+
+		while( alarmButtons_idList[ buttonOrder ] != buttonView.getId( ) )
+		{
+			++buttonOrder;
+		}
+
+		return buttonOrder;
 	}
 
 	public void onActivityResult( int requestCode, int resultCode, Intent data )
@@ -103,30 +117,30 @@ public class AlarmSetting extends AppCompatActivity {
 				String dateString = data.getStringExtra( "date" );
 				int callerID = data.getIntExtra( "callerID", 0xFFFFFFFF );
 				Button alarmButton = findViewById( callerID );
-				Date alarmDate;
+				int buttonOrder = getButtonOrder( alarmButton );
 
 				try
 				{
-					alarmDate = rawAlarmFormat.parse( dateString );
+					alarmDate[ buttonOrder ] = rawAlarmFormat.parse( dateString );
 				}
 				catch( ParseException e )
 				{
-					alarmDate = Calendar.getInstance( ).getTime( );
+					alarmDate[ buttonOrder ] = Calendar.getInstance( ).getTime( );
 				}
 
-				alarmPreferences.edit().putString("alarmDate" + callerID, rawAlarmFormat.format( alarmDate ) );
-				alarmButton.setText( timeFormat.format( alarmDate ) );
+				alarmPreferences.edit().putString("alarmDate" + callerID, rawAlarmFormat.format( alarmDate[ buttonOrder ] ) );
+				alarmButton.setText( timeFormat.format( alarmDate[ buttonOrder ] ) );
 
-				alarmPreferences.edit( ).commit( );
+				alarmPreferences.edit().apply( );
 			}
 		}
 	}
 
-	public int getSwitchOrder( CompoundButton buttonView )
+	private int getSwitchOrder( CompoundButton buttonView )
 	{
 		int switchOrder = 0;
 
-		while (alarmSwitches_idList[switchOrder] != buttonView.getId())
+		while ( alarmSwitches_idList[ switchOrder ] != buttonView.getId( ) )
 		{
 			++switchOrder;
 		}
@@ -137,10 +151,42 @@ public class AlarmSetting extends AppCompatActivity {
 	public void setAlarm( CompoundButton buttonView )
 	{
 		int switchOrder = getSwitchOrder( buttonView );
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime( alarmDate[ switchOrder ] );
+/*
+		calendar.set(Calendar.HOUR_OF_DAY,  );
+		calendar.set(Calendar.MINUTE, alarmTimePicker.getMinute());
+		calendar.set(Calendar.SECOND, 0);
+*/
+		if ( calendar.before( Calendar.getInstance( ) ) )
+		{
+			calendar.add( Calendar.DATE, 1 );
+		}
+
+		Intent intent = new Intent(this, AlarmReceiver.class);
+		intent.addCategory("D" + rawAlarmFormat.format( calendar.getTime() ) );
+		intent.putExtra("msg", "accountingNotify" );
+
+		PendingIntent pendingIntent = PendingIntent.getBroadcast( getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT );
+
+		AlarmManager alarmManager = ( AlarmManager ) getSystemService( Context.ALARM_SERVICE );
+		alarmManager.setInexactRepeating( AlarmManager.ELAPSED_REALTIME_WAKEUP, calendar.getTimeInMillis() - Calendar.getInstance().getTimeInMillis(), 1000 * 60, pendingIntent );
 	}
 
-	public void unsetAlarm( CompoundButton buttonView )
+	public void cancelAlarm(CompoundButton buttonView )
 	{
 		int switchOrder = getSwitchOrder( buttonView );
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime( alarmDate[ switchOrder ] );
+
+		Intent intent = new Intent( this, AlarmReceiver.class );
+		intent.addCategory( "D" + rawAlarmFormat.format( calendar.getTime() ) );
+		intent.putExtra( "msg", "accountingNotify" );
+
+		PendingIntent pendingIntent = PendingIntent.getBroadcast( getApplicationContext(), 1, intent, PendingIntent.FLAG_UPDATE_CURRENT );
+
+		AlarmManager alarmManager = ( AlarmManager ) getSystemService( Context.ALARM_SERVICE );
+		alarmManager.cancel( pendingIntent );
 	}
 }
