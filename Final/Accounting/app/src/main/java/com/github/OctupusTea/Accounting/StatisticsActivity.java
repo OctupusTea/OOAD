@@ -32,12 +32,14 @@ import java.util.Random;
 
 import static android.graphics.Color.*;
 
-public class StatisticsActivity extends AppCompatActivity {
+public class statisticsActivity extends AppCompatActivity {
 
 
     private static int[] COLORS = new int[] { Color.RED, Color.GREEN,
             Color.BLUE, Color.MAGENTA, Color.CYAN, Color.YELLOW, Color.DKGRAY };
-    double data[] = new double[] { 2000, 1000, 6000, 1280, 6000,2000,22000 };
+
+    double data[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    String category[] = new String []{"食","衣","住","行","育","樂","收入"};
 
     private CategorySeries mSeries = new CategorySeries("");// PieChart的DataSet
 
@@ -62,18 +64,31 @@ public class StatisticsActivity extends AppCompatActivity {
         String str_m;
         String str_d;
         DatePart datePart = new DatePart();
-        Double sum;
-        TextView textView_sum = (TextView) findViewById(R.id.textView5);
+        double sum;
+        double income;
+        double balance;
+        TextView textView_sum = (TextView) findViewById(R.id.textView7);
+        TextView textView_income = (TextView) findViewById(R.id.textView5);
+        TextView textView_balance = (TextView) findViewById(R.id.textView9);
         switch(choice){
             case 1:
                 formatter = new SimpleDateFormat ("yyyy");
                 Date curDate_1 =  new Date(System.currentTimeMillis());
                 str_y = formatter.format(curDate_1); //年
                 datePart.setYear(str_y);
-                sum = sAdapter.getSumOfAllCategory( "year", datePart );
-                textView_sum.setText( sum.toString( ) );
+                sum = sAdapter.getSumOfAllCategory( "year", datePart ); //支出
+                textView_sum.setText(Double.valueOf(sum).toString());
                 // List<Statistics> sumOfCategoryList_1 = sAdapter.getSumOfEachCategory("year", datePart);
                 // textView_sum.setText(sumOfCategoryList_1);
+                income = sAdapter.getEachCategory( "year", datePart, category[6] ); //收入
+                textView_income.setText(Double.valueOf(income).toString());
+                balance=income-sum; //結餘
+                textView_balance.setText(Double.valueOf(balance).toString());
+
+                for(int i=0;i<7;i++){
+                    data[i]=sAdapter.getEachCategory( "year", datePart,category[i] );
+                }
+
                 break;
             case 2:
                 formatter = new SimpleDateFormat ("yyyy/MM");
@@ -84,8 +99,19 @@ public class StatisticsActivity extends AppCompatActivity {
                 str_m= formatter_m.format(curDate_2); //月
                 datePart.setYear(str_y);
                 datePart.setMonth(str_m);
-                sum = sAdapter.getSumOfAllCategory("month", datePart);
-                textView_sum.setText(sum.toString());
+                sum = sAdapter.getSumOfAllCategory( "month", datePart ); //支出
+                textView_sum.setText(Double.valueOf(sum).toString());
+                // List<Statistics> sumOfCategoryList_2 = sAdapter.getSumOfEachCategory("month", datePart);
+                // textView_sum.setText(sumOfCategoryList_2);
+                income = sAdapter.getEachCategory( "month", datePart, category[6] ); //收入
+                textView_income.setText(Double.valueOf(income).toString());
+                balance=income-sum; //結餘
+                textView_balance.setText(Double.valueOf(balance).toString());
+
+                for(int i=0;i<7;i++){
+                    data[i]=sAdapter.getEachCategory( "month", datePart,category[i] );
+                }
+
                 break;
             default:
                 formatter = new SimpleDateFormat ("yyyy/MM/dd");
@@ -99,8 +125,18 @@ public class StatisticsActivity extends AppCompatActivity {
                 datePart.setYear(str_y);
                 datePart.setMonth(str_m);
                 datePart.setMonth(str_d);
-                sum = sAdapter.getSumOfAllCategory("day", datePart);
-                textView_sum.setText(sum.toString());
+                sum = sAdapter.getSumOfAllCategory( "day", datePart );
+                textView_sum.setText(Double.valueOf(sum).toString());
+                //List<Statistics> sumOfCategoryList_3 = sAdapter.getSumOfEachCategory("day", datePart);
+                //textView_sum.setText(sumOfCategoryList_3);
+                income = sAdapter.getEachCategory( "day", datePart,category[6] ); //收入
+                textView_income.setText(Double.valueOf(income).toString());
+                balance=income-sum; //結餘
+                textView_balance.setText(Double.valueOf(balance).toString());
+
+                for(int i=0;i<7;i++){
+                    data[i]=sAdapter.getEachCategory( "day", datePart,category[i] );
+                }
         }
         Date curDate =  new Date(System.currentTimeMillis());
         String str = formatter.format(curDate);
@@ -121,18 +157,78 @@ public class StatisticsActivity extends AppCompatActivity {
             slt_tmp=slt_now;
         }
         SimpleDateFormat formatter2;
+        SimpleDateFormat formatter_y;
+        SimpleDateFormat formatter_m;
+        SimpleDateFormat formatter_d;
+        String str_y;
+        String str_m;
+        String str_d;
+        DatePart datePart = new DatePart();
+        double sum;
+        double income;
+        double balance;
+        TextView textView_sum = (TextView) findViewById(R.id.textView7);
+        TextView textView_income = (TextView) findViewById(R.id.textView5);
+        TextView textView_balance = (TextView) findViewById(R.id.textView9);
         switch(slt_now){
             case 1:
                 formatter2 = new SimpleDateFormat("yyyy");
                 calendar.add(Calendar.YEAR, direction);
+                Date curDate_1 =  new Date(System.currentTimeMillis());
+                str_y = formatter2.format(curDate_1); //年
+                datePart.setYear(str_y);
+                sum = sAdapter.getSumOfAllCategory( "year", datePart );
+                textView_sum.setText(Double.valueOf(sum).toString());
+                income = sAdapter.getEachCategory( "year", datePart,category[6] ); //收入
+                textView_income.setText(Double.valueOf(income).toString());
+                balance=income-sum; //結餘
+                textView_balance.setText(Double.valueOf(balance).toString());
+                for(int i=0;i<7;i++){
+                    data[i]=sAdapter.getEachCategory( "year", datePart,category[i] );
+                }
                 break;
             case 2:
                 formatter2 = new SimpleDateFormat("yyyy/MM");
                 calendar.add(Calendar.MONTH, direction);
+                formatter_y = new SimpleDateFormat ("yyyy");
+                formatter_m = new SimpleDateFormat ("MM");
+                Date curDate_2 =  new Date(System.currentTimeMillis());
+                str_y = formatter_y.format(curDate_2); //年
+                str_m= formatter_m.format(curDate_2); //月
+                datePart.setYear(str_y);
+                datePart.setMonth(str_m);
+                sum = sAdapter.getSumOfAllCategory( "month", datePart );
+                textView_sum.setText(Double.valueOf(sum).toString());
+                income = sAdapter.getEachCategory( "month", datePart, category[6] ); //收入
+                textView_income.setText(Double.valueOf(income).toString());
+                balance=income-sum; //結餘
+                textView_balance.setText(Double.valueOf(balance).toString());
+                for(int i=0;i<7;i++){
+                    data[i]=sAdapter.getEachCategory( "month", datePart,category[i] );
+                }
                 break;
             default:
                 formatter2 = new SimpleDateFormat("yyyy/MM/dd");
                 calendar.add(Calendar.DATE, direction);
+                formatter_y = new SimpleDateFormat ("yyyy");
+                formatter_m = new SimpleDateFormat ("MM");
+                formatter_d = new SimpleDateFormat ("dd");
+                Date curDate_3 =  new Date(System.currentTimeMillis());
+                str_y = formatter_y.format(curDate_3);
+                str_m= formatter_m.format(curDate_3);
+                str_d= formatter_d.format(curDate_3);
+                datePart.setYear(str_y);
+                datePart.setMonth(str_m);
+                datePart.setMonth(str_d);
+                sum = sAdapter.getSumOfAllCategory( "day", datePart );
+                textView_sum.setText(Double.valueOf(sum).toString());
+                income = sAdapter.getEachCategory( "day", datePart,category[6] ); //收入
+                textView_income.setText(Double.valueOf(income).toString());
+                balance=income-sum; //結餘
+                textView_balance.setText(Double.valueOf(balance).toString());
+                for(int i=0;i<7;i++){
+                    data[i]=sAdapter.getEachCategory( "day", datePart,category[i] );
+                }
         }
         String Ago = formatter2.format(calendar.getTime());
         TextView textView = (TextView) findViewById(R.id.textView3);
@@ -206,7 +302,6 @@ public class StatisticsActivity extends AppCompatActivity {
         mSeries.add("樂", data[5]);
         mSeries.add("收入", data[6]);
 
-
         for (int i = 0; i < data.length; i++) {
             SimpleSeriesRenderer renderer = new SimpleSeriesRenderer();
             renderer.setChartValuesFormat(NumberFormat.getCurrencyInstance());// 設置百分比
@@ -250,6 +345,4 @@ public class StatisticsActivity extends AppCompatActivity {
         int B = random.nextInt(255);
         return Color.rgb(R, G, B);
     }
-
-
 }
