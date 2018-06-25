@@ -174,7 +174,7 @@ public class StatisticsActivity extends AppCompatActivity {
             case 1:
                 formatter2 = new SimpleDateFormat("yyyy");
                 calendar.add(Calendar.YEAR, direction);
-                Date curDate_1 =  new Date(System.currentTimeMillis());
+                Date curDate_1 = calendar.getTime();
                 str_y = formatter2.format(curDate_1); //年
                 datePart.setYear(str_y);
                 sum = sAdapter.getSumOfAllCategory( "year", datePart );
@@ -192,7 +192,7 @@ public class StatisticsActivity extends AppCompatActivity {
                 calendar.add(Calendar.MONTH, direction);
                 formatter_y = new SimpleDateFormat ("yyyy");
                 formatter_m = new SimpleDateFormat ("MM");
-                Date curDate_2 =  new Date(System.currentTimeMillis());
+                Date curDate_2 =  calendar.getTime();
                 str_y = formatter_y.format(curDate_2); //年
                 str_m= formatter_m.format(curDate_2); //月
                 datePart.setYear(str_y);
@@ -213,7 +213,7 @@ public class StatisticsActivity extends AppCompatActivity {
                 formatter_y = new SimpleDateFormat ("yyyy");
                 formatter_m = new SimpleDateFormat ("MM");
                 formatter_d = new SimpleDateFormat ("dd");
-                Date curDate_3 =  new Date(System.currentTimeMillis());
+                Date curDate_3 =  calendar.getTime();
                 str_y = formatter_y.format(curDate_3);
                 str_m= formatter_m.format(curDate_3);
                 str_d= formatter_d.format(curDate_3);
