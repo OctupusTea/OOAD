@@ -22,7 +22,6 @@ public class StatisticsAdapter extends StatisticsFunction {
         db = dbFunction.getDatabase();
     }
 
-
     @Override
     public List<Record> getDataByYear(String year) {
         List<Record> records = new ArrayList<Record>();

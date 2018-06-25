@@ -17,6 +17,7 @@
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:checked="false"
+        android:text="確定"
         android:onClick="OnClick" />
 
 </LinearLayout>

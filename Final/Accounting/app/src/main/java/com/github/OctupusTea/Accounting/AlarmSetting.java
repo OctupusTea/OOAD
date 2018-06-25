@@ -20,6 +20,9 @@ public class AlarmSetting extends AppCompatActivity {
 	static final SimpleDateFormat timeFormat = new SimpleDateFormat( "h:mm a" );
 	SharedPreferences alarmPreferences;
 
+	int[ ] alarmButtons_idList = {R.id.alarmButton0, R.id.alarmButton1, R.id.alarmButton2, R.id.alarmButton3, R.id.alarmButton4};
+	int[ ] alarmSwitches_idList = { R.id.alarmSwitch0, R.id.alarmSwitch1, R.id.alarmSwitch2, R.id.alarmSwitch3, R.id.alarmSwitch4 };
+
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +32,8 @@ public class AlarmSetting extends AppCompatActivity {
 
         alarmPreferences = getSharedPreferences("alarmPreferences", MODE_PRIVATE);
 
-        Button remindersettingBtn = (Button) findViewById(R.id.alarmConfirm );
-        remindersettingBtn.setOnClickListener(new View.OnClickListener() {
+        Button alarmConfirmButton = (Button) findViewById(R.id.alarmConfirm );
+        alarmConfirmButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -40,7 +43,26 @@ public class AlarmSetting extends AppCompatActivity {
             }
         });
 
-		int[ ] alarmButtons_idList = {R.id.alarmButton0, R.id.alarmButton1, R.id.alarmButton2, R.id.alarmButton3, R.id.alarmButton4};
+        for( int i = 0; i < 5; ++i )
+		{
+			Switch alarmSwitch = findViewById( alarmSwitches_idList[ i ] );
+
+			alarmSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+				{
+					if ( isChecked )
+					{
+						setAlarm( buttonView );
+					}
+					else
+					{
+						unsetAlarm( buttonView );
+					}
+				}
+			});
+		}
+
 
 		for( int i = 0; i < 5; ++i )
 		{
@@ -100,8 +122,25 @@ public class AlarmSetting extends AppCompatActivity {
 		}
 	}
 
-	public void setAlarm( Date alarmDate )
+	public int getSwitchOrder( CompoundButton buttonView )
 	{
-		// TODO here
+		int switchOrder = 0;
+
+		while (alarmSwitches_idList[switchOrder] != buttonView.getId())
+		{
+			++switchOrder;
+		}
+
+		return switchOrder;
+	}
+
+	public void setAlarm( CompoundButton buttonView )
+	{
+		int switchOrder = getSwitchOrder( buttonView );
+	}
+
+	public void unsetAlarm( CompoundButton buttonView )
+	{
+		int switchOrder = getSwitchOrder( buttonView );
 	}
 }

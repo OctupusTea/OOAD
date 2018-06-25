@@ -55,14 +55,15 @@ public abstract class StatisticsFunction {
         List< Statistics > sumList = getSumOfEachCategory( dateType, datepart );
         double sum = 0.0;
         String category="收入";
-	for( Statistics i : sumList )
+        for( Statistics i : sumList )
         {
-            if(!category.equals(i.getCategory())){
+            if(!category.equals(i.getCategory()))
+            {
                 sum += i.getSum( );
             }
-	}
+        }
 
-	return sum;
+        return sum;
     }
     public double getEachCategory( String dateType, DatePart datepart, String category )
     {

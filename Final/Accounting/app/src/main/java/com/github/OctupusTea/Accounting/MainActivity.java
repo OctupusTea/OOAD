@@ -333,8 +333,9 @@ public class MainActivity extends AppCompatActivity {
 				return true;
 			case R.id.action_settings1:
 				//RunActivity( null ); // TODO: add statistics activity here
-                Intent intent3 = new Intent(this, StatisticsActivity.class);
-                startActivity(intent3);
+                //Intent intent3 = new Intent(this, StatisticsActivity.class);
+                //startActivity(intent3);
+				RunActivity( StatisticsActivity.class );
 				return true;
 			case R.id.action_settings2:
 				RunActivity( AlarmSetting.class );
