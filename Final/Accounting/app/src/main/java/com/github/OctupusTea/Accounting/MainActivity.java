@@ -340,17 +340,16 @@ public class MainActivity extends AppCompatActivity {
 				RunActivity( AlarmSetting.class );
 				return true;
 			case R.id.action_settings3:
-			    Intent intent = new Intent(this, BackupActivity.class);
-			    startActivity(intent);
-				//RunActivity( BackupActivity.class );
+			    //Intent intent = new Intent(this, BackupActivity.class);
+			    //startActivity(intent);
+				RunActivity( BackupActivity.class );
 				return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void RunActivity( Class<?> cls ) {
-		Intent intent = new Intent();
-		intent.setClass(MainActivity.this, cls);
+		Intent intent = new Intent(MainActivity.this, cls );
 		startActivity(intent);
 		MainActivity.this.finish();
 	}

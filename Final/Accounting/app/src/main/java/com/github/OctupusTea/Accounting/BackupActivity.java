@@ -18,7 +18,6 @@ public class BackupActivity extends AppCompatActivity {
     private Button exportButton;
     private String selectedBackupType;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

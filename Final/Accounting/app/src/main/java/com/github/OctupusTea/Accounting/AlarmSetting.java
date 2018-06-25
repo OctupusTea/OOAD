@@ -18,7 +18,7 @@ public class AlarmSetting extends AppCompatActivity {
 	Date[ ] alarmDate = new Date[ 5 ];
 	static final SimpleDateFormat rawAlarmFormat = new SimpleDateFormat( "yyyy-MM-dd-HH:mm" );
 	static final SimpleDateFormat timeFormat = new SimpleDateFormat( "h:mm a" );
-	SharedPreferences alarmPreferences = getSharedPreferences("alarmPreferences", MODE_PRIVATE);
+	SharedPreferences alarmPreferences;
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,8 @@ public class AlarmSetting extends AppCompatActivity {
         setContentView(R.layout.activity_alarm_setting);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        alarmPreferences = getSharedPreferences("alarmPreferences", MODE_PRIVATE);
 
         Button remindersettingBtn = (Button) findViewById(R.id.alarmConfirm );
         remindersettingBtn.setOnClickListener(new View.OnClickListener() {

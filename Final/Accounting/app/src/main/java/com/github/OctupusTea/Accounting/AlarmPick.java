@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.ToggleButton;
 
@@ -24,9 +25,21 @@ public class AlarmPick extends AppCompatActivity {
 		alarmTimePicker = findViewById( R.id.timePicker );
 
 		callerID = getIntent( ).getIntExtra( "callerID", 0xFFFFFFFF );
+
+		Button timePick = (Button) findViewById(R.id.timePickerButton );
+		timePick.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick( View v ) {
+				setAndReturn( v );
+				/*Intent intent = new Intent();
+				intent.setClass(AlarmSetting.this, MainActivity.class);
+				startActivity(intent);*/
+			}
+		});
 	}
 
-	public void onClick( View view )
+	public void setAndReturn( View view )
 	{
 		Calendar calendar = Calendar.getInstance();
 
