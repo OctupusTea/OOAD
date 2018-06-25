@@ -50,6 +50,9 @@ public class AlarmSetting extends AppCompatActivity {
 		{
 			Switch alarmSwitch = findViewById( alarmSwitches_idList[ i ] );
 
+			boolean switched = alarmPreferences.getBoolean( "alarmSet" + i, false );
+			alarmSwitch.setChecked( switched );
+
 			alarmSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
@@ -79,13 +82,12 @@ public class AlarmSetting extends AppCompatActivity {
 			catch( ParseException e )
 			{
 				alarmDate[ i ] = Calendar.getInstance( ).getTime( );
-				alarmPreferences.edit( ).putString( "alarmDate" + alarmButton.getId( ), rawAlarmFormat.format( alarmDate[ i ] ) );
+				alarmPreferences.edit( ).putString( "alarmDate" + i, rawAlarmFormat.format( alarmDate[ i ] ) )
+								.apply( );
 			}
 
 			alarmButton.setText( timeFormat.format( alarmDate[ i ] ) );
 		}
-
-		alarmPreferences.edit().apply();
 	}
 
     public void onClick( View view )
@@ -128,10 +130,9 @@ public class AlarmSetting extends AppCompatActivity {
 					alarmDate[ buttonOrder ] = Calendar.getInstance( ).getTime( );
 				}
 
-				alarmPreferences.edit().putString("alarmDate" + callerID, rawAlarmFormat.format( alarmDate[ buttonOrder ] ) );
+				alarmPreferences.edit( ).putString("alarmDate" + buttonOrder, rawAlarmFormat.format( alarmDate[ buttonOrder ] ) )
+								.apply( );
 				alarmButton.setText( timeFormat.format( alarmDate[ buttonOrder ] ) );
-
-				alarmPreferences.edit().apply( );
 			}
 		}
 	}
@@ -151,6 +152,10 @@ public class AlarmSetting extends AppCompatActivity {
 	public void setAlarm( CompoundButton buttonView )
 	{
 		int switchOrder = getSwitchOrder( buttonView );
+
+		alarmPreferences.edit().putBoolean("alarmSet" + switchOrder, true)
+						.apply();
+
 
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime( alarmDate[ switchOrder ] );
@@ -177,6 +182,10 @@ public class AlarmSetting extends AppCompatActivity {
 	public void cancelAlarm(CompoundButton buttonView )
 	{
 		int switchOrder = getSwitchOrder( buttonView );
+
+		alarmPreferences.edit().putBoolean("alarmSet" + switchOrder, false)
+						.apply();
+
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime( alarmDate[ switchOrder ] );
 
